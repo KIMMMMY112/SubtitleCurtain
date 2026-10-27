@@ -29,6 +29,7 @@ Safari 18.1（20619.2.8.11.10），macOS 15.1，Userscripts 4.8.6 (136)。使用
 ## 尚待确认
 
 - iPhone 与 iPad 的真机验收由用户自行进行；收到实际结果前保持待验收。
+- iPad 用户反馈：能打开 Userscripts，但没有安装提示或找不到 SubtitleCurtain；尚未完成安装/运行验收。已补充直接选择脚本目录的安装 ZIP 和步骤，包内脚本与发布脚本一致，但未在 iPad 真机确认该补救流程。
 - Safari 下哔哩哔哩具体视频的完整功能组合。
 - 完整 Xcode 构建、签名、原生 Safari App 安装与 App Store 分发。
 

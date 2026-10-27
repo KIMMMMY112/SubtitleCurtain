@@ -27,6 +27,15 @@ const script = metadata+`\n(function(manager){\n'use strict';\nconst globalThis 
 const file = resolve(`dist/safari/SubtitleCurtain-Safari-v${version}.user.js`);await writeFile(file,script);
 await mkdir('dist/safari/userscripts',{recursive:true});await writeFile('dist/safari/userscripts/SubtitleCurtain.user.js',script);
 await mkdir('userscripts',{recursive:true});await writeFile('userscripts/SubtitleCurtain.user.js',script);
+// iOS can read a selected directory directly, without the URL install prompt.
+const kit = resolve('dist/safari/userscript-install-kit');await mkdir(kit,{recursive:true});
+await writeFile(resolve(kit,'SubtitleCurtain.user.js'),script);
+await cp('LICENSE',resolve(kit,'LICENSE'));
+await writeFile(resolve(kit,'README.txt'),`SubtitleCurtain Safari Userscripts installation\n\n1. Extract this ZIP in the iPad/iPhone Files app.\n2. Open the Userscripts app, tap Set Userscripts Directory, and select the folder directly containing SubtitleCurtain.user.js.\n3. Enable Userscripts for your video website in Safari. Refresh the website, open Safari extensions > Userscripts, and enable SubtitleCurtain.\n4. The page toolbar has Show/Hide and Settings controls.\n\nThis is a userscript directory, not a native Safari extension. Do not select the unextracted ZIP. Selecting a different directory changes which scripts Userscripts loads; if you already use other scripts, copy SubtitleCurtain.user.js into your existing script directory instead.\n\n中文：在“文件”App 中解压；打开 Userscripts App → Set Userscripts Directory → 选择直接包含 SubtitleCurtain.user.js 的文件夹。回到 Safari 视频网页，允许 Userscripts 访问该网站并刷新，在扩展菜单中启用 SubtitleCurtain。已有其他脚本时，将本脚本放进现有目录即可，不用更换目录。\n`);
+const kitZip = resolve(`dist/safari/SubtitleCurtain-Safari-Userscripts-v${version}.zip`);await rm(kitZip,{force:true});
+execFileSync('zip',['-X','-q',kitZip,'SubtitleCurtain.user.js','README.txt','LICENSE'],{cwd:kit});
+const kitDigest = createHash('sha256').update(await readFile(kitZip)).digest('hex');
+await writeFile('dist/safari/Userscripts-SHA256SUMS.txt',kitDigest+'  '+basename(kitZip)+'\n');
 const native = resolve('dist/safari/webextension');await rm(native,{recursive:true,force:true});await mkdir(native);
 for (const entry of ['src/core','src/extension','src/popup','assets']) await cp(entry,resolve(native,entry),{recursive:true,filter:p=>basename(p)!=='.DS_Store'});
 await cp('LICENSE',resolve(native,'LICENSE'));
@@ -39,5 +48,5 @@ for (const script of manifest.content_scripts) delete script.match_origin_as_fal
 await writeFile(resolve(native,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 const zip = resolve(`dist/safari/SubtitleCurtain-Safari-WebExtension-Resources-v${version}.zip`);await rm(zip,{force:true});
 execFileSync('zip',['-X','-q','-r',zip,'manifest.json','src','assets','LICENSE','PRIVACY.md','README.md'],{cwd:native});
-const sums=[];for(const p of [file,zip])sums.push(createHash('sha256').update(await readFile(p)).digest('hex')+'  '+basename(p));
+const sums=[];for(const p of [file,zip,kitZip])sums.push(createHash('sha256').update(await readFile(p)).digest('hex')+'  '+basename(p));
 await writeFile('dist/safari/SHA256SUMS.txt',sums.join('\n')+'\n');console.log(`Built ${file}\nNative web-extension resources (requires Apple packaging): ${zip}`);

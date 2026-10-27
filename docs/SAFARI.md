@@ -6,8 +6,21 @@ Safari 已纳入项目支持范围。当前提供免费 **Userscripts 用户脚�
 
 ## 安装
 
+### iPad / iPhone 没有安装提示：直接选择脚本目录
+
+Userscripts App 用来选择脚本目录；脚本列表和安装提示在 Safari 的 Userscripts 扩展弹窗内。Mac 上安装过脚本，不等于 iPad 已经安装。
+
+1. 用 Safari 下载 [Userscripts 安装 ZIP](https://github.com/KIMMMMY112/SubtitleCurtain/releases/download/v0.2.0-safari-preview.1/SubtitleCurtain-Safari-Userscripts-v0.2.0.zip)。
+2. 打开“文件”App → 下载项，点 ZIP 解压。确认解压后的文件夹中有 `SubtitleCurtain.user.js`。
+3. 打开 **Userscripts App** → **Set Userscripts Directory**，选择上一步直接包含 `SubtitleCurtain.user.js` 的文件夹，不要选择 ZIP。已有其他用户脚本时，把这个 `.user.js` 文件移动到当前脚本目录即可，不必更换目录。
+4. 回到 Safari 的哔哩哔哩网页，打开扩展菜单 → Userscripts，允许访问当前网站、开启脚本注入与 SubtitleCurtain，再刷新网页。可从弹窗的文件夹按钮查看全部脚本；普通列表可能只显示匹配当前网页的脚本。
+
+这条路径不依赖网页安装提示，属于 [Userscripts 官方支持的目录安装方式](https://github.com/quoid/userscripts#usage)。如果解压后仍找不到条目，先确认选中的文件夹层级以及文件扩展名确实为 `.user.js`；不能是 `.txt` 或未解压的 ZIP。当前没有 iPad 实机完成此流程的记录，不能仅根据安装包检查标为通过。
+
+### 通过脚本链接安装（Mac / iPhone / iPad）
+
 1. 从 [App Store 安装免费的 Userscripts](https://apps.apple.com/us/app/userscripts/id1463298887)。在 Mac / iPhone / iPad 各自的 Safari 扩展设置中启用它。按系统提示为要使用的视频网站授予访问权限；可以先只允许哔哩哔哩。
-2. 在 **Safari** 打开 [预览脚本的原始文件](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/safari-support/userscripts/SubtitleCurtain.user.js)，再打开 Safari 扩展菜单 → Userscripts，按它显示的安装提示安装。也可以下载 `.user.js`，放进 Userscripts App 显示的脚本目录。
+2. 在 **Safari** 打开 [预览脚本的原始文件](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/v0.2.0-safari-preview.1/userscripts/SubtitleCurtain.user.js)，再打开 Safari 扩展菜单 → Userscripts，按它显示的安装提示安装。若提示没有出现，检查 Userscripts 对安装页面的访问权限，或直接使用上方目录安装方式。
 3. 确认 Userscripts 菜单里 SubtitleCurtain 已启用，刷新视频网页。右上角出现「显示 / 隐藏」和「设置」按钮。
 4. 点击「显示」，拖动遮挡条；通过「设置」调宽高、样式和形状。调整完打开「锁定位置」，以便点击下方的视频播放器。
 
