@@ -18,7 +18,7 @@ const results = [], errors = [], observations = [];
 async function step(name,job) {console.log('RUN',name);try {await job();results.push({name,status:'PASS'});console.log('PASS',name);}catch(e){results.push({name,status:'FAIL',error:e.stack});throw e;}}
 function monitor(p) {p.on('pageerror',e=>errors.push({url:p.url(),error:e.message}));const original=p.waitForFunction.bind(p);p.waitForFunction=(fn,opts={},...args)=>original(fn,{polling:50,...opts},...args);}
 async function launch() {
- browser = await puppeteer.launch({executablePath,headless:process.env.HEADLESS === '1',pipe:true,userDataDir:profile,
+ browser = await puppeteer.launch({executablePath,headless:process.env.HEADLESS === '1',pipe:true,userDataDir:profile,dumpio:process.env.SC_BROWSER_STDERR==='1',
    protocolTimeout:20000,defaultViewport:{width:1200,height:800},enableExtensions:label==='Brave'?true:[root],args:['--enable-unsafe-extension-debugging','--no-default-browser-check','--autoplay-policy=no-user-gesture-required','--window-size=1200,900',...(label==='Brave'?[`--load-extension=${root}`,`--disable-extensions-except=${root}`]:[])]});
  // MV3 workers can stay asleep on a browser restart until a content-script message arrives.
  const wake = await browser.newPage();await wake.goto(url,{waitUntil:'domcontentloaded'});

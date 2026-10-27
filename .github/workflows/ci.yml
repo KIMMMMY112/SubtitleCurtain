@@ -16,6 +16,10 @@ jobs:
       - run: xvfb-run -a npm run test:browser
         env:
           SC_BROWSER_LABEL: Chrome for Testing (CI Linux)
+          # Ephemeral Ubuntu runners restrict the user namespaces Chrome's sandbox needs.
+          # This is limited to the isolated CI browser, never the installed extension or local browser.
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
+          SC_BROWSER_STDERR: '1'
       - run: npm run package
       - uses: actions/upload-artifact@v4
         if: always()
