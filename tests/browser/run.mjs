@@ -130,10 +130,11 @@ try {
    const other=await browser.newPage();await other.goto(`http://localhost:${port}/`);await ready(other.mainFrame());assert.equal((await maskInfo(other.mainFrame())).hidden,true);await other.close();
  });
  await step('Container Fullscreen API playback keeps mask visible, draggable and persistent',async()=>{
-   await page.bringToFront();await page.click('#play');await page.click('#fullscreen');await page.waitForFunction(()=>!!document.fullscreenElement);await ready();
+   await page.bringToFront();await page.click('#play');await page.click('#fullscreen');
+   await page.waitForFunction(()=>{const h=document.getElementById('subtitle-curtain-root');return document.fullscreenElement?.id==='player'&&h?.parentElement===document.fullscreenElement&&h.matches(':popover-open');});
    const m=await maskInfo();assert.equal(m.hidden,false);assert.equal(m.parent,'player');assert.equal(m.popover,true);
    await drag({x:m.x+50,y:m.y+20},{x:m.x+30,y:m.y-20});assert.ok((await maskInfo()).y<m.y);await page.screenshot({path:resolve(out,'container-fullscreen.png')});
-   await page.evaluate(()=>document.exitFullscreen());await page.waitForFunction(()=>!document.fullscreenElement);assert.equal((await maskInfo()).hidden,false);
+   await page.evaluate(()=>document.exitFullscreen());await page.waitForFunction(()=>!document.fullscreenElement&&document.getElementById('subtitle-curtain-root')?.parentElement===document.documentElement);assert.equal((await maskInfo()).hidden,false);
  });
  await step('Video element Fullscreen API playback shows top-layer curtain and permits lock',async()=>{
    await page.click('#videoFullscreen');await page.waitForFunction(()=>document.fullscreenElement?.tagName==='VIDEO');assert.equal((await maskInfo()).hidden,false);assert.equal((await maskInfo()).popover,true);const m=await maskInfo();assert.ok(m.width>0&&m.height>0);await drag({x:m.x+m.width/2,y:m.y+m.height/2},{x:m.x+m.width/2-20,y:m.y+m.height/2-20});const n=await maskInfo();observations.push({mode:'native-video-fullscreen',mouseDragMoved:n.x!==m.x||n.y!==m.y,note:'Native video fullscreen is only claimed for visible curtain and keyboard toggle/lock; use a player-container fullscreen for mouse editing.'});
@@ -143,6 +144,7 @@ try {
    await page.goto(url+'frames');await ready();await page.waitForSelector('#child');const frame=await(await page.$('#child')).contentFrame();await ready(frame);
    assert.equal((await maskInfo(frame)).hidden,true);await page.bringToFront();await page.$eval('#child',el=>el.scrollIntoView({block:'center'}));await input('locked',true);await page.bringToFront();await frame.click('#play');await frame.evaluate(()=>document.getElementById('player').requestFullscreen());await frame.waitForFunction(()=>!!document.fullscreenElement,{polling:50});
    await frame.waitForFunction(()=>!document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden,{polling:50});
+   await page.waitForFunction(()=>document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden);
    assert.equal((await maskInfo()).hidden,true);assert.equal((await maskInfo(frame)).hidden,false);
    await page.screenshot({path:resolve(out,'iframe-fullscreen.png')});await frame.evaluate(()=>document.exitFullscreen());await page.waitForFunction(()=>!document.fullscreenElement&&!document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden);assert.equal((await maskInfo()).hidden,false);await input('locked',false);
  });
