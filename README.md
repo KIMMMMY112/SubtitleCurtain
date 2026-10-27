@@ -1,5 +1,7 @@
 # SubtitleCurtain · 字幕遮挡器
 
+当前 `safari-support` 分支为 **v0.2.0 Safari 预览版**。已发布的稳定版仍为 v0.1.0。Safari 的 Mac / iPhone / iPad 免费安装方式、已测范围和真机验收步骤见 [Safari 使用说明](docs/SAFARI.md)；iPhone/iPad 尚未记录为真机通过。
+
 免费、开源、只在本机运行的 Manifest V3 浏览器扩展。用可移动遮挡条盖住视频里的中文字幕，让注意力回到英语。无需账号、服务器、API 或订阅。
 
 ## 安装（免费，无需扩展商店）
@@ -41,7 +43,7 @@
 
 直接对 `<video>` 元素启用的浏览器原生全屏单独记录：顶层遮挡和快捷键按实际浏览器结果列出；原生全屏可能限制遮挡层的鼠标命中，因此不承诺在该模式内拖动或缩放。请在进入原生全屏前定位，或使用网站提供的播放器容器全屏。
 
-浏览器内部页面、扩展商店等禁止注入的页面、独立画中画窗口、操作系统原生视频窗口不支持。DRM、特殊播放器、关闭站点访问权限、扩展被网站干预、受限制或不匹配的 iframe 可能影响使用。Safari、Firefox、iPhone/iPad、桌面悬浮窗尚未实现。**没有将未实测的视频网站宣称为兼容通过。**
+浏览器内部页面、扩展商店等禁止注入的页面、独立画中画窗口、操作系统原生视频窗口不支持。DRM、特殊播放器、关闭站点访问权限、扩展被网站干预、受限制或不匹配的 iframe 可能影响使用。Safari 可使用本分支的 Userscripts 预览版；Firefox 和桌面悬浮窗尚未实现，iPhone/iPad 的 Safari 真机状态另见 Safari 说明。**没有将未实测的视频网站宣称为兼容通过。**
 
 如果安装后没有遮挡条，先刷新网页，确认扩展的站点访问已允许，再检查弹窗的显示开关。全屏中可用 `Alt + Shift + S`，macOS 上 Alt 对应 Option。锁定后无法拖动是预期行为。
 
@@ -62,9 +64,11 @@ npm run package      # dist/unpacked + ZIP + SHA256SUMS.txt
 SC_BROWSER_EXECUTABLE='/absolute/path/to/browser' SC_BROWSER_LABEL='Brave' npm run test:browser
 ```
 
+Safari 预览版：`npm run package:safari` 生成自包含用户脚本和原生扩展资源包；`npm run test:webkit` 执行明确标注为模拟环境的 WebKit 验收。
+
 `HEADLESS=1` 可用于 CI；测试记录会分别注明有界面和无界面运行方式。`SC_EXTENSION_DIR=/absolute/path/to/unpacked` 可验收解压后的发布包。结果和截图写入 `test-results/`。源代码仅依赖浏览器 API；npm 包均为开发依赖，不包含在安装 ZIP 中。
 
-架构：`src/core/core.js` 提供数据校验、几何与样式；`src/core/overlay.js` 提供无 Chrome API 的 DOM 渲染和交互；`src/extension/` 提供 MV3 存储/消息适配器；`src/popup/` 提供控制与花色管理。未来 Safari 用户脚本可复用核心，替换存储和消息适配器；本版不包含或承诺已经测试该移植。
+架构：`src/core/core.js` 提供数据校验、几何与样式；`src/core/overlay.js` 提供无 Chrome API 的 DOM 渲染和交互；`src/extension/` 提供 MV3 存储/消息适配器；`src/popup/` 提供控制与花色管理。Safari 用户脚本复用同一个核心、DOM 渲染器与设置控制器，单独注入 GM 存储适配器；原生 Safari Web Extension 资源包已提供，但尚未经 Xcode 签名、打包和安装验收。
 
 ## 隐私与开源
 

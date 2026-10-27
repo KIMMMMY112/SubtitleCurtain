@@ -1,6 +1,6 @@
 # Privacy / 隐私说明
 
-SubtitleCurtain v0.1.0 · 2026-10-27
+SubtitleCurtain · Chromium v0.1.0 / Safari v0.2.0 preview
 
 The extension runs locally. It has no analytics, advertising, remote code, network requests, server, subscription, or account system. It does not read video/audio streams, subtitle text, browsing history, cookies, credentials, or form contents. Keyboard handlers inspect whether focus is inside an editable field so shortcuts do not interrupt typing; typed text is not collected.
 
@@ -11,3 +11,14 @@ The extension requests `storage` for these settings and `activeTab` for the tool
 Reset clears a site's settings to defaults; presets can be deleted in the manager. Browser extension removal deletes extension storage. Export presets before removal if you want a backup. GitHub and the browser's own network behavior are governed by their respective policies; they are not extension telemetry.
 
 中文：所有设置和自定义花色仅存于本机浏览器。不收集视频、字幕、输入内容、账号、Cookie 或浏览历史，不联网、不追踪。网站主机名用于区分本地配置，完整网页地址不保存。卸载前可导出花色库备份。
+
+
+## Safari Userscripts preview
+
+The Safari userscript is bundled locally with the same renderer and settings UI. It uses only Userscripts' `GM.getValue` and `GM.setValue` for curtain preferences and saved appearance presets. The script itself makes no network requests and has no remote dependencies. The namespace URL in its metadata identifies the project; it is not a runtime request. Userscripts is a separate third-party extension governed by its own permissions and privacy practices.
+
+The uncompiled native Safari Web Extension resources declare HTTP/HTTPS host access for the same page injection. These resources have not been packaged, signed or installed as an Apple app.
+
+A small in-page toolbar opens the controls. For matching iframe players the adapter uses the top ancestor origin or referrer only to select a local site-settings key; a restricted referrer can cause a frame to use its own hostname. No values are sent to a website. Visible matching frames poll local GM values every 2.5 seconds for cross-tab changes; hidden/inactive frames skip polling. Concurrent edits across separate tabs follow the last completed write.
+
+Moving script files through iCloud may sync source code; this project does not implement device-to-device settings synchronization. Export/import appearance JSON is available. Native iOS fullscreen and picture-in-picture are outside the webpage and cannot be covered by this script.

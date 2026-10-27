@@ -8,7 +8,7 @@ function page({extension=false,core=false,hanging=false}={}) {
  const context=vm.createContext({console,URLSearchParams,location:{protocol:extension?'chrome-extension:':'file:',search:''},
  document:{getElementById:get,body:{classList:{add(){}}}},setTimeout:fn=>{callbacks.push(fn);return 1;},clearTimeout(){},
  chrome:extension?{runtime:{id:'test'},tabs:{query:()=>hanging?new Promise(()=>{}):Promise.resolve([])},storage:{onChanged:{addListener(){}}}}:undefined});
- if(core)vm.runInContext(fs.readFileSync('src/core/core.js','utf8'),context);
+ if(core){vm.runInContext(fs.readFileSync('src/core/core.js','utf8'),context);vm.runInContext(fs.readFileSync('src/core/controls.js','utf8'),context);}
  vm.runInContext(fs.readFileSync('src/popup/popup.js','utf8'),context);
  return {get,callbacks};
 }

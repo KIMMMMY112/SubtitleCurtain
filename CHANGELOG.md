@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 Safari preview (not a stable Safari App Store release)
+
+- Share settings controls and validated style-library editing across the extension and Safari Userscripts adapter.
+- Add a self-contained Userscripts build for Mac, iPhone and iPad, with a page toolbar, no remote runtime code, and GM-backed local settings.
+- Add visual-viewport sizing, primary-pointer protection and prefixed Safari fullscreen events.
+- Accept Safari extension URLs and the browser API namespace; provide native Safari Web Extension resources for future Apple packaging.
+- Add GM storage regression tests, WebKit desktop/phone/tablet viewport checks, and a separate native/device verification record.
+- Real iPhone/iPad acceptance remains pending; native iOS video fullscreen and picture-in-picture cannot display this webpage overlay.
+
 ## 0.1.0 — 2026-10-27
 
 - Continue the supplied six-file MV3 project; preserve its dependency-free core and initial implementation in Git history.
