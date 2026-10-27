@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="popup.css" />
+  <title>SubtitleCurtain</title>
+</head>
+<body>
+  <main>
+    <header class="heading">
+      <div class="logo" aria-hidden="true">▰</div>
+      <div><h1>SubtitleCurtain</h1><p>专注英文字幕 · Focus on English</p></div>
+      <span class="version">v0.1.0</span>
+    </header>
+    <section class="site" aria-live="polite"><span class="dot"></span><span id="site">正在连接当前网页…</span></section>
+    <div id="error" class="error" role="alert" hidden></div>
+    <fieldset id="controls" disabled>
+      <section class="switches">
+        <label class="toggle-row"><span><strong>显示遮挡条</strong><small>Show curtain</small></span><input id="enabled" type="checkbox" role="switch" /></label>
+        <label class="toggle-row"><span><strong>锁定位置</strong><small>Lock · 不拦截视频点击</small></span><input id="locked" type="checkbox" role="switch" /></label>
+      </section>
+      <section class="group">
+        <h2>外观 <span>Appearance</span></h2>
+        <label for="fillType">遮挡样式</label>
+        <select id="fillType"><option value="solid">纯色 · Solid</option><option value="gradient">渐变 · Gradient</option><option value="pattern">花纹 · Pattern</option></select>
+        <div class="colors">
+          <label for="color1">主颜色<input type="color" id="color1" value="#111827" /></label>
+          <label for="color2">第二颜色<input type="color" id="color2" value="#ec4899" /></label>
+        </div>
+        <div id="patternLine"><label for="pattern">花纹类型</label><select id="pattern"><option value="stripes">斜条纹</option><option value="dots">圆点</option><option value="checker">棋盘格</option><option value="waves">波纹</option></select></div>
+        <label for="shape">形状</label>
+        <select id="shape"><option value="rectangle">直角矩形</option><option value="rounded">自定义圆角</option><option value="pill">胶囊形</option><option value="ellipse">椭圆形</option><option value="ticket">票据切角</option></select>
+        <div class="range-heading"><label for="radius">圆角半径</label><output id="radiusValue">12 px</output></div>
+        <input id="radius" type="range" min="0" max="100" step="1" />
+        <div class="range-heading"><label for="opacity">不透明度</label><output id="opacityValue">100%</output></div>
+        <input id="opacity" type="range" min="10" max="100" step="1" />
+      </section>
+      <section class="group">
+        <h2>大小 <span>Size</span></h2>
+        <div class="range-heading"><label for="width">宽度（屏幕比例）</label><output id="widthValue">70%</output></div>
+        <input id="width" type="range" min="12" max="100" step="1" />
+        <div class="range-heading"><label for="height">高度</label><output id="heightValue">44 px</output></div>
+        <input id="height" type="range" min="16" max="160" step="1" />
+        <p class="hint">还可以直接拖动遮挡条移动，用右下角方块缩放。</p>
+      </section>
+      <section class="actions"><button id="reset" type="button">↺ 恢复当前网站默认设置</button></section>
+    </fieldset>
+    <footer><span>快捷键：Alt + Shift + S</span><span>🔒 本地保存 · 无账号</span></footer>
+  </main>
+  <script src="../core/core.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
