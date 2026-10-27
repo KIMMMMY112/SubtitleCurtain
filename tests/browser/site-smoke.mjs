@@ -6,7 +6,7 @@ const bili=process.env.SC_SITE==='bilibili';const out=resolve('test-results',bil
 const result={date:new Date().toISOString(),url:bili?'https://www.bilibili.com/video/BV1vp4y1x7FW/':'https://www.youtube.com/watch?v=jNQXAC9IVRw&hl=en',platform:process.platform,arch:process.arch,headless:true,results:[]};
 let browser;
 try {
- browser=await puppeteer.launch({executablePath:process.env.SC_BROWSER_EXECUTABLE || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,pipe:true,enableExtensions:[resolve('.')],args:['--enable-unsafe-extension-debugging','--autoplay-policy=no-user-gesture-required']});
+ browser=await puppeteer.launch({executablePath:process.env.SC_BROWSER_EXECUTABLE || (process.platform==='darwin'?'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome':await puppeteer.executablePath()),headless:true,pipe:true,enableExtensions:[resolve('.')],args:['--enable-unsafe-extension-debugging','--autoplay-policy=no-user-gesture-required']});
  result.browser=await browser.version();const worker=await(await browser.waitForTarget(t=>t.type()==='service_worker'&&t.url().endsWith('/background.js'))).worker();
  const page=await browser.newPage();await page.goto(result.url,{waitUntil:'domcontentloaded',timeout:45000});await page.bringToFront();
  const rejects=await page.$$('button');for(const button of rejects){const text=await button.evaluate(b=>b.textContent);if(/Reject all/i.test(text)){await button.click();break;}}

@@ -5,7 +5,7 @@ import {readFile,mkdir,mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 const root = resolve(process.env.SC_EXTENSION_DIR || '.');
-const executablePath = process.env.SC_BROWSER_EXECUTABLE || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : puppeteer.executablePath());
+const executablePath = process.env.SC_BROWSER_EXECUTABLE || (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : await puppeteer.executablePath());
 const label = process.env.SC_BROWSER_LABEL || 'Google Chrome';
 const slug = label.toLowerCase().replace(/[^a-z0-9]+/g,'-');
 const out = resolve('test-results',slug); await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
