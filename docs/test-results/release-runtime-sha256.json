@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0",
+  "testedRuntimeMatchesSource": true,
+  "sha256": {
+    "assets/icon128.png": "1d3930c1b5e07a6f20c6d877aa2ea4e1933fcb76d6cf0d5c6a6701b6953c80c4",
+    "assets/icon16.png": "d48c7d8f76d3c48db1892aca66b5822c87b1fa3a2ab8bab8408d6943960c7e0f",
+    "assets/icon48.png": "0e07c5e3700d50fec2475334858b4565861b5dd84e35797f6ad5f32cb205efa3",
+    "manifest.json": "86246ee5259dea358c76714516e846571498b4bd8dd225df3711f8b1786ccc10",
+    "src/core/core.js": "171b039b987ab4405ea26fa63039d4e5b6b3625a4e264ff90b1fcc08febaa5cd",
+    "src/core/overlay.js": "cb48626ef2cd9977df422b0a654eea4961d94ef16c9769b96beaf7c035e54976",
+    "src/extension/background.js": "1caad4395b3fdf31df53086d29b26b440a22fa8c5d0cedaeb263e17093e0cdb3",
+    "src/extension/content.js": "955b6e302ec37fe862104772aae79dab613230e85cf7cff472e61c73a26c36e0",
+    "src/popup/popup.css": "5353af6b664aa08a401471f1d4d53b76606d2abb643e1912fa27ac116134db59",
+    "src/popup/popup.html": "9530cfa17b96e9adb8bc75250c0b08f36b66488239f835fbbef09c732ef8c69b",
+    "src/popup/popup.js": "66eb50005c5b9574f936162d8eacb007d6ef16896dea9bfc150cd0312d6d11f5"
+  }
+}
