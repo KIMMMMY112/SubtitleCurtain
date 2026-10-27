@@ -1,0 +1,23 @@
+{
+  "name": "subtitle-curtain",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Free, local-only subtitle masking browser extension",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src scripts tests && node scripts/check.mjs",
+    "test": "node --test tests/unit/*.test.cjs",
+    "test:browser": "node tests/browser/run.mjs",
+    "package": "node scripts/package.mjs",
+    "check": "npm run lint && npm test",
+    "test:site": "node tests/browser/site-smoke.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.13.0",
+    "puppeteer": "25.16.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

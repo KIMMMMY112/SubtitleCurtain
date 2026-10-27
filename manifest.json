@@ -3,8 +3,11 @@
   "name": "SubtitleCurtain — 字幕遮挡器",
   "short_name": "SubtitleCurtain",
   "version": "0.1.0",
+  "minimum_chrome_version": "120",
   "description": "Cover translated subtitles with a draggable, customizable curtain. Local only; no accounts or servers.",
   "permissions": ["storage", "activeTab"],
+  "background": {"service_worker": "src/extension/background.js"},
+  "icons": {"16": "assets/icon16.png", "48": "assets/icon48.png", "128": "assets/icon128.png"},
   "action": {
     "default_title": "SubtitleCurtain — Settings",
     "default_popup": "src/popup/popup.html"
@@ -12,9 +15,11 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["src/core/core.js", "src/extension/content.js"],
+      "js": ["src/core/core.js", "src/core/overlay.js", "src/extension/content.js"],
       "run_at": "document_idle",
-      "all_frames": false
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
     }
   ]
 }

@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>SubtitleCurtain real playback fixture</title>
+<style>body{margin:0;background:#0b1020;color:white;font:16px system-ui}h1{font-size:20px;margin:14px}#player{position:relative;background:#111827;width:100%;height:76vh;display:grid;place-items:center}video{width:100%;height:100%;object-fit:contain}#player:fullscreen{height:100vh}button{padding:10px;margin:8px}canvas{display:none}iframe{width:100%;height:70vh;border:0}.spacer{height:600px}.toolbar{position:fixed;top:0;right:0;z-index:1000;padding:4px;background:#0b1020e8;max-width:100%;font-size:12px}.toolbar button{padding:7px;margin:2px}.toolbar input{max-width:150px}</style>
+<h1>SubtitleCurtain · 可重复的真实视频播放验收</h1><div id="player"><video id="video" muted playsinline controls></video></div>
+<div class="toolbar"><button id="play">播放</button><button id="fullscreen">播放器容器全屏</button><button id="videoFullscreen">Video 元素全屏</button><input id="editor" placeholder="快捷键不应拦截文本输入"><output id="clicks">0</output></div><canvas id="source" width="960" height="540"></canvas><div id="frames"></div><div class="spacer"></div>
+<script>
+const canvas=document.getElementById('source'),ctx=canvas.getContext('2d'),video=document.getElementById('video');
+let frame=0;function draw(){frame++;ctx.fillStyle='#182339';ctx.fillRect(0,0,960,540);ctx.fillStyle='#818cf8';ctx.beginPath();ctx.arc(100+frame%750,200,50,0,Math.PI*2);ctx.fill();ctx.textAlign='center';ctx.fillStyle='white';ctx.font='28px sans-serif';ctx.fillText('Learning happens one sentence at a time.',480,420);ctx.font='30px sans-serif';ctx.fillText('学习从每一句开始 · 中文字幕',480,485);requestAnimationFrame(draw);}draw();
+video.srcObject=canvas.captureStream(24);document.getElementById('play').onclick=()=>video.play();
+document.getElementById('fullscreen').onclick=()=>document.getElementById('player').requestFullscreen();document.getElementById('videoFullscreen').onclick=()=>video.requestFullscreen();
+document.getElementById('player').addEventListener('pointerdown',()=>{const e=document.getElementById('clicks');e.value=Number(e.value)+1;});
+if(location.pathname==='/frames'){const f=document.createElement('iframe');f.id='child';f.allow='fullscreen; autoplay';f.allowFullscreen=true;f.src='http://localhost:'+location.port+'/child';document.getElementById('frames').append(f);}
+</script></html>

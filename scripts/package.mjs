@@ -1,0 +1,15 @@
+import {mkdir,rm,cp,readFile,writeFile} from 'node:fs/promises';
+import {resolve,basename} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const {version} = JSON.parse(await readFile('manifest.json','utf8'));
+const dest = resolve('dist/unpacked');
+await mkdir('dist',{recursive:true}); await rm(dest,{recursive:true,force:true}); await mkdir(dest);
+const entries = ['manifest.json','src','assets','README.md','START-HERE.html','LICENSE','PRIVACY.md','CHANGELOG.md','docs'];
+for (const entry of entries) await cp(entry,resolve(dest,entry),{recursive:true,filter:src=>basename(src)!=='.DS_Store'});
+const zip = resolve(`dist/SubtitleCurtain-Chromium-v${version}.zip`);
+await rm(zip,{force:true});
+execFileSync('zip',['-X','-q','-r',zip,...entries],{cwd:dest});
+const digest = createHash('sha256').update(await readFile(zip)).digest('hex');
+await writeFile(resolve('dist/SHA256SUMS.txt'),`${digest}  SubtitleCurtain-Chromium-v${version}.zip\n`);
+console.log(`Built ${zip}\nSHA256 ${digest}`);

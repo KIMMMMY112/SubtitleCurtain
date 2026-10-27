@@ -1,0 +1,26 @@
+name: CI
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: xvfb-run -a npm run test:browser
+        env:
+          SC_BROWSER_LABEL: Chrome for Testing (CI Linux)
+      - run: npm run package
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: subtitle-curtain-build-and-browser-results
+          path: |
+            dist/
+            test-results/
