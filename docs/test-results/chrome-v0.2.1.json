@@ -1,7 +1,6 @@
 {
   "label": "Chrome v0.2.1 release",
   "version": "Chrome/156.0.8078.49",
-  "extensionDir": "/Users/qimin/Downloads/SubtitleCurtain",
   "headless": true,
   "date": "2026-10-29T10:02:00.911Z",
   "platform": "darwin",
