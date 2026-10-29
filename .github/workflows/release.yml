@@ -1,11 +1,17 @@
 name: Build release packages
 on:
   workflow_dispatch:
+  push:
+    branches: [release-readiness]
+    paths: [.github/workflows/release.yml]
 permissions:
-  contents: read
+  contents: write
 jobs:
   packages:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_SOURCE_BRANCH: ${{ github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,6 +30,51 @@ jobs:
       - run: npm run test:website
         env:
           PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
+      - name: Verify the installed store package
+        run: xvfb-run -a npm run test:browser
+        env:
+          SC_EXTENSION_DIR: dist/store
+          SC_BROWSER_LABEL: Chrome for Testing (Store ZIP v0.2.1 CI Linux)
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
+      - run: node scripts/record-ci.mjs
+      - run: npm run package && npm run package:materials && npm run check:artifacts
+      - name: Save actual CI verification records
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/test-results docs/RELEASE-STATUS.md
+          git commit -m 'Record verified release pipeline results'
+          git push origin "HEAD:$RELEASE_SOURCE_BRANCH"
+      - name: Publish separate stable Chromium and Safari preview releases
+        run: |
+          version=$(node -p "JSON.parse(require('fs').readFileSync('manifest.json')).version")
+          stable="v${version}"
+          preview="v${version}-safari-preview.1"
+          head=$(git rev-parse HEAD)
+          if gh release view "$stable" >/dev/null 2>&1; then echo 'Stable release already exists; refusing to overwrite it'; exit 1; fi
+          if gh release view "$preview" >/dev/null 2>&1; then echo 'Preview release already exists; refusing to overwrite it'; exit 1; fi
+          cat > /tmp/stable-notes.md <<'NOTES'
+          Free GitHub installation remains available. Download the **Chromium ZIP**, extract it and use Developer mode → Load unpacked. The **Store ZIP** is a publisher upload package; **Publisher Materials** contains store descriptions, real screenshots, privacy/review notes and the Greasy Fork submission script.
+
+          This release preserves the curtain, dragging, resizing, fills, opacity, shapes, show/hide, per-site persistence, supported container fullscreen, lock and appearance manager. It adds a bilingual website/README, genuine demo captures, separate store packaging and clearer privacy disclosures. All runtime files match between manual and store packages.
+
+          Checks: source/permission/CSP checks and 22 unit tests; real Chrome regression; a separate installed store-package regression; WebKit desktop/phone/tablet viewport checks with a GM test bridge; website interaction/layout tests; package parity and SHA256. Exact browser versions/results are attached in the repository test records. Edge/Brave/Opera v0.1.0 results remain historical; no new untested browser or website is marked passed. iPhone/iPad and actual script-manager upgrade acceptance remain pending.
+
+          Store listings and Greasy Fork are not yet published. No paid service or account enrollment has been purchased. GitHub v0.1.0 and the v0.2.0 Safari preview remain available. Safari downloads are published separately as a prerelease.
+
+          中文：普通用户下载 Chromium ZIP；Store ZIP 用于发布者提交。保留全部核心功能，新增中英文官网和说明、真实演示、商店发布资料及一致性校验。iPhone/iPad 保持待真机验收，已有 iPad 安装问题记录；不夸大兼容性。所有 GitHub 安装方式继续免费。
+          NOTES
+          gh release create "$stable" "dist/SubtitleCurtain-Chromium-v${version}.zip" "dist/SubtitleCurtain-Store-v${version}.zip" "dist/SubtitleCurtain-Publisher-Materials-v${version}.zip" dist/SHA256SUMS.txt --target "$head" --title "SubtitleCurtain ${stable}" --notes-file /tmp/stable-notes.md --latest=true
+          cat > /tmp/preview-notes.md <<'NOTES'
+          Free Safari **Userscripts preview** using the same portable core and controls as Chromium. Install the `.user.js` in Safari through Userscripts; if the prompt is absent, extract the Userscripts ZIP and select its script folder in the host app. Keep the existing script name/namespace and replace the same entry to avoid duplicates.
+
+          The GitHub build now declares permanent `.meta.js` and `.user.js` update endpoints on main. Metadata/build contracts are verified, but script-manager update behavior varies and automatic checks are disabled in some Userscripts releases. Actual manager-upgrade and iPhone/iPad physical-device acceptance remain pending. There is an unresolved iPad installation report.
+
+          Native iOS system video fullscreen, picture-in-picture and native apps cannot be covered by a webpage overlay. Use inline playback or supported webpage/player-container fullscreen. The WebExtension Resources ZIP is uncompiled developer material, not a signed Safari app.
+
+          中文：这是免费的 Safari Userscripts 预览版，不是原生 App。没有安装提示时可使用目录 ZIP。更新地址已配置，但不能保证各设备自动升级；iPhone/iPad 真机验收和管理器实际更新流程仍待确认，不标记通过。系统视频全屏、画中画、App 内视频无法遮挡。
+          NOTES
+          gh release create "$preview" "dist/safari/SubtitleCurtain-Safari-v${version}.user.js" "dist/safari/SubtitleCurtain-Safari-Userscripts-v${version}.zip" "dist/safari/SubtitleCurtain-Safari-WebExtension-Resources-v${version}.zip" dist/safari/SubtitleCurtain.meta.js dist/safari/SHA256SUMS.txt --target "$head" --title "SubtitleCurtain ${stable} Safari Preview 1" --notes-file /tmp/preview-notes.md --prerelease --latest=false
       - uses: actions/upload-artifact@v4
         with:
           name: verified-release-packages
