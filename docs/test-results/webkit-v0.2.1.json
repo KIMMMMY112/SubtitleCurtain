@@ -1,0 +1,160 @@
+{
+  "engine": "Playwright WebKit 27.2",
+  "platform": "darwin",
+  "version": "0.2.1",
+  "gmStorage": "In-memory test bridge, not the real Userscripts extension",
+  "physicalSafariOrIOS": false,
+  "date": "2026-10-29T10:01:58.477Z",
+  "profiles": [
+    {
+      "profile": "desktop",
+      "viewport": {
+        "width": 1200,
+        "height": 800
+      },
+      "results": [
+        {
+          "name": "Starts hidden with functional toolbar and settings",
+          "status": "PASS"
+        },
+        {
+          "name": "Touch-sized controls and viewport-constrained panel",
+          "status": "PASS"
+        },
+        {
+          "name": "Width, height, opacity, fills and custom shape edit the curtain",
+          "status": "PASS"
+        },
+        {
+          "name": "Saved library create, rename, apply and delete",
+          "status": "PASS"
+        },
+        {
+          "name": "Hiding and reopening retains size and style",
+          "status": "PASS"
+        },
+        {
+          "name": "Mouse-pointer dragging in this viewport; physical touch drag remains unverified",
+          "status": "PASS"
+        },
+        {
+          "name": "Lock passes pointer input to the underlying video",
+          "status": "PASS"
+        },
+        {
+          "name": "Reload restores enabled state, lock, geometry and appearance",
+          "status": "PASS"
+        },
+        {
+          "name": "Actual video frames play",
+          "status": "PASS"
+        },
+        {
+          "name": "Settings can reopen after reload and a narrow/landscape viewport",
+          "status": "PASS"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "phone-viewport",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "results": [
+        {
+          "name": "Starts hidden with functional toolbar and settings",
+          "status": "PASS"
+        },
+        {
+          "name": "Touch-sized controls and viewport-constrained panel",
+          "status": "PASS"
+        },
+        {
+          "name": "Width, height, opacity, fills and custom shape edit the curtain",
+          "status": "PASS"
+        },
+        {
+          "name": "Saved library create, rename, apply and delete",
+          "status": "PASS"
+        },
+        {
+          "name": "Hiding and reopening retains size and style",
+          "status": "PASS"
+        },
+        {
+          "name": "Mouse-pointer dragging in this viewport; physical touch drag remains unverified",
+          "status": "PASS"
+        },
+        {
+          "name": "Lock passes pointer input to the underlying video",
+          "status": "PASS"
+        },
+        {
+          "name": "Reload restores enabled state, lock, geometry and appearance",
+          "status": "PASS"
+        },
+        {
+          "name": "Actual video frames play",
+          "status": "PASS"
+        },
+        {
+          "name": "Settings can reopen after reload and a narrow/landscape viewport",
+          "status": "PASS"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "profile": "tablet-viewport",
+      "viewport": {
+        "width": 1024,
+        "height": 1366
+      },
+      "results": [
+        {
+          "name": "Starts hidden with functional toolbar and settings",
+          "status": "PASS"
+        },
+        {
+          "name": "Touch-sized controls and viewport-constrained panel",
+          "status": "PASS"
+        },
+        {
+          "name": "Width, height, opacity, fills and custom shape edit the curtain",
+          "status": "PASS"
+        },
+        {
+          "name": "Saved library create, rename, apply and delete",
+          "status": "PASS"
+        },
+        {
+          "name": "Hiding and reopening retains size and style",
+          "status": "PASS"
+        },
+        {
+          "name": "Mouse-pointer dragging in this viewport; physical touch drag remains unverified",
+          "status": "PASS"
+        },
+        {
+          "name": "Lock passes pointer input to the underlying video",
+          "status": "PASS"
+        },
+        {
+          "name": "Reload restores enabled state, lock, geometry and appearance",
+          "status": "PASS"
+        },
+        {
+          "name": "Actual video frames play",
+          "status": "PASS"
+        },
+        {
+          "name": "Settings can reopen after reload and a narrow/landscape viewport",
+          "status": "PASS"
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

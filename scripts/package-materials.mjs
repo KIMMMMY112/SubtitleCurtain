@@ -1,0 +1,15 @@
+import {readFile,mkdir,rm,cp,writeFile} from 'node:fs/promises';
+import {resolve,basename} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const {version}=JSON.parse(await readFile('manifest.json','utf8'));
+const directory=resolve('dist/publisher-materials');await rm(directory,{recursive:true,force:true});await mkdir(directory,{recursive:true});
+await cp('docs/distribution',resolve(directory,'instructions'),{recursive:true});
+await cp(`dist/SubtitleCurtain-Store-v${version}.zip`,resolve(directory,`SubtitleCurtain-Store-v${version}.zip`));
+await cp('dist/greasyfork/SubtitleCurtain.user.js',resolve(directory,'GreasyFork-SubtitleCurtain.user.js'));
+await cp('PRIVACY.md',resolve(directory,'PRIVACY.md'));await cp('LICENSE',resolve(directory,'LICENSE'));
+const file=resolve(`dist/SubtitleCurtain-Publisher-Materials-v${version}.zip`);await rm(file,{force:true});
+execFileSync('zip',['-X','-q','-r',file,'.'],{cwd:directory});
+const sum=createHash('sha256').update(await readFile(file)).digest('hex')+'  '+basename(file)+'\n';
+const existing=(await readFile('dist/SHA256SUMS.txt','utf8')).split('\n').filter(line=>line&&!line.endsWith(basename(file))).join('\n');
+await writeFile('dist/SHA256SUMS.txt',existing+'\n'+sum);console.log('Built '+file);

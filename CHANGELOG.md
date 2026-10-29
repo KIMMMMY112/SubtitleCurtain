@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1
+
+- Unify shared Chromium/Safari sources while keeping Safari physical-device acceptance pending.
+- Add English-first and Chinese READMEs, authentic extension demo captures, installation guide, contribution guide and issue templates.
+- Add a bilingual static GitHub Pages site with browser-specific instructions and honest publication/compatibility status.
+- Separate store-upload ZIP from the documented GitHub manual-install ZIP; verify exact runtime parity and checksums.
+- Add stable userscript metadata/download endpoints and a Greasy Fork-specific self-contained build with platform-managed update URLs. Automatic manager updates remain version-dependent and unverified on iOS.
+- Prepare bilingual store/Greasy Fork/community materials; adjust store icon padding. No paid account or service enrolled.
+
+
 ## 0.2.0 Safari preview (not a stable Safari App Store release)
 
 - Share settings controls and validated style-library editing across the extension and Safari Userscripts adapter.

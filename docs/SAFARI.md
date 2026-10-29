@@ -10,7 +10,7 @@ Safari 已纳入项目支持范围。当前提供免费 **Userscripts 用户脚�
 
 Userscripts App 用来选择脚本目录；脚本列表和安装提示在 Safari 的 Userscripts 扩展弹窗内。Mac 上安装过脚本，不等于 iPad 已经安装。
 
-1. 用 Safari 下载 [Userscripts 安装 ZIP](https://github.com/KIMMMMY112/SubtitleCurtain/releases/download/v0.2.0-safari-preview.1/SubtitleCurtain-Safari-Userscripts-v0.2.0.zip)。
+1. 用 Safari 下载 [Userscripts 安装 ZIP](https://github.com/KIMMMMY112/SubtitleCurtain/releases/download/v0.2.1-safari-preview.1/SubtitleCurtain-Safari-Userscripts-v0.2.1.zip)。
 2. 打开“文件”App → 下载项，点 ZIP 解压。确认解压后的文件夹中有 `SubtitleCurtain.user.js`。
 3. 打开 **Userscripts App** → **Set Userscripts Directory**，选择上一步直接包含 `SubtitleCurtain.user.js` 的文件夹，不要选择 ZIP。已有其他用户脚本时，把这个 `.user.js` 文件移动到当前脚本目录即可，不必更换目录。
 4. 回到 Safari 的哔哩哔哩网页，打开扩展菜单 → Userscripts，允许访问当前网站、开启脚本注入与 SubtitleCurtain，再刷新网页。可从弹窗的文件夹按钮查看全部脚本；普通列表可能只显示匹配当前网页的脚本。
@@ -20,13 +20,17 @@ Userscripts App 用来选择脚本目录；脚本列表和安装提示在 Safari
 ### 通过脚本链接安装（Mac / iPhone / iPad）
 
 1. 从 [App Store 安装免费的 Userscripts](https://apps.apple.com/us/app/userscripts/id1463298887)。在 Mac / iPhone / iPad 各自的 Safari 扩展设置中启用它。按系统提示为要使用的视频网站授予访问权限；可以先只允许哔哩哔哩。
-2. 在 **Safari** 打开 [预览脚本的原始文件](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/v0.2.0-safari-preview.1/userscripts/SubtitleCurtain.user.js)，再打开 Safari 扩展菜单 → Userscripts，按它显示的安装提示安装。若提示没有出现，检查 Userscripts 对安装页面的访问权限，或直接使用上方目录安装方式。
+2. 在 **Safari** 打开 [预览脚本的原始文件](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/v0.2.1-safari-preview.1/userscripts/SubtitleCurtain.user.js)，再打开 Safari 扩展菜单 → Userscripts，按它显示的安装提示安装。若提示没有出现，检查 Userscripts 对安装页面的访问权限，或直接使用上方目录安装方式。
 3. 确认 Userscripts 菜单里 SubtitleCurtain 已启用，刷新视频网页。右上角出现「显示 / 隐藏」和「设置」按钮。
 4. 点击「显示」，拖动遮挡条；通过「设置」调宽高、样式和形状。调整完打开「锁定位置」，以便点击下方的视频播放器。
 
 iOS/iPadOS 的 Safari 设置位置会随系统版本变化，可以从系统设置搜索 Safari，然后进入扩展。若只看到脚本文本，仍需从 Safari 的 Userscripts 弹窗完成安装，不是把文本粘贴进地址栏。Userscripts 官方说明了两种安装方式：[官方文档](https://github.com/quoid/userscripts#usage)。
 
 ## 保留设置与更新
+
+GitHub 版现已提供固定的 `.meta.js` 更新元数据和 `.user.js` 下载地址，二者版本一致。Greasy Fork 专用构建不写入 GitHub 更新地址，由 Greasy Fork 在发布时写入自己的地址；目前尚未获得正式脚本页面。
+
+Userscripts 的更新行为依版本而异，部分版本停用了自动检查；不能承诺 iPhone/iPad 自动升级。管理器支持更新时使用其更新控制；否则替换同一 `SubtitleCurtain.user.js`，不要另装不同名称的副本。固定地址见 [元数据](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.meta.js) 与 [完整脚本](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.user.js)。本次验证覆盖元数据/构建一致性，不等于已完成真机管理器更新验收。
 
 保持脚本的 `@name`、`@namespace` 和已安装的脚本条目稳定；更新时替换原脚本，避免同时启用两个 SubtitleCurtain。Mac 默认目录中的推荐文件名为 `SubtitleCurtain.user.js`。不要把包含多个旧版本的整个发布目录当成脚本目录。
 

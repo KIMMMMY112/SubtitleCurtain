@@ -2,6 +2,7 @@ import {readFile,writeFile,mkdir,rm,cp} from 'node:fs/promises';
 import {resolve,basename} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {metadata} from './userscript-metadata.mjs';
 const {version} = JSON.parse(await readFile('manifest.json','utf8'));
 await mkdir('dist/safari',{recursive:true});
 const html = (await readFile('src/popup/popup.html','utf8')).match(/<main>([\s\S]*?)<\/main>/)[0];
@@ -22,11 +23,15 @@ css += `
 `;
 const files = ['src/core/core.js','src/core/overlay.js','src/core/controls.js','src/userscript/storage.js'];
 const sources = await Promise.all(files.map(file=>readFile(file,'utf8')));
-const metadata = `// ==UserScript==\n// @name         SubtitleCurtain\n// @namespace    https://github.com/KIMMMMY112/SubtitleCurtain\n// @version      ${version}\n// @description  Safari preview: local subtitle curtain with touch controls and saved styles\n// @match        http://*/*\n// @match        https://*/*\n// @run-at       document-end\n// @grant        GM.getValue\n// @grant        GM.setValue\n// @inject-into  content\n// @license      MIT\n// ==/UserScript==\n`;
-const script = metadata+`\n(function(manager){\n'use strict';\nconst globalThis = {GM:manager};\n`+sources.join('\n')+`\nglobalThis.SubtitleCurtainUserscriptAssets = ${JSON.stringify({html,css})};\n`+await readFile('src/userscript/entry.js','utf8')+`\n})(typeof GM === 'object' ? GM : undefined);\n`;
+const body = `\n// Source: https://github.com/KIMMMMY112/SubtitleCurtain (v${version}).\n// Shared first-party modules: ${files.join(', ')} and src/userscript/entry.js.\n// Inlined to work offline with Userscripts without remote @require dependencies.\n(function(manager){\n'use strict';\nconst globalThis = {GM:manager};\n`+sources.join('\n')+`\nglobalThis.SubtitleCurtainUserscriptAssets = ${JSON.stringify({html,css})};\n`+await readFile('src/userscript/entry.js','utf8')+`\n})(typeof GM === 'object' ? GM : undefined);\n`;
+const script = metadata(version)+body;
 const file = resolve(`dist/safari/SubtitleCurtain-Safari-v${version}.user.js`);await writeFile(file,script);
 await mkdir('dist/safari/userscripts',{recursive:true});await writeFile('dist/safari/userscripts/SubtitleCurtain.user.js',script);
 await mkdir('userscripts',{recursive:true});await writeFile('userscripts/SubtitleCurtain.user.js',script);
+await writeFile('userscripts/SubtitleCurtain.meta.js',metadata(version));
+await writeFile('dist/safari/SubtitleCurtain.meta.js',metadata(version));
+await mkdir('dist/greasyfork',{recursive:true});
+await writeFile('dist/greasyfork/SubtitleCurtain.user.js',metadata(version,{channel:'greasyfork'})+body);
 // iOS can read a selected directory directly, without the URL install prompt.
 const kit = resolve('dist/safari/userscript-install-kit');await mkdir(kit,{recursive:true});
 await writeFile(resolve(kit,'SubtitleCurtain.user.js'),script);
@@ -48,5 +53,5 @@ for (const script of manifest.content_scripts) delete script.match_origin_as_fal
 await writeFile(resolve(native,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 const zip = resolve(`dist/safari/SubtitleCurtain-Safari-WebExtension-Resources-v${version}.zip`);await rm(zip,{force:true});
 execFileSync('zip',['-X','-q','-r',zip,'manifest.json','src','assets','LICENSE','PRIVACY.md','README.md'],{cwd:native});
-const sums=[];for(const p of [file,zip,kitZip])sums.push(createHash('sha256').update(await readFile(p)).digest('hex')+'  '+basename(p));
+const sums=[];for(const p of [file,zip,kitZip,resolve('dist/safari/SubtitleCurtain.meta.js')])sums.push(createHash('sha256').update(await readFile(p)).digest('hex')+'  '+basename(p));
 await writeFile('dist/safari/SHA256SUMS.txt',sums.join('\n')+'\n');console.log(`Built ${file}\nNative web-extension resources (requires Apple packaging): ${zip}`);

@@ -21,6 +21,10 @@ jobs:
           PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
           SC_BROWSER_STDERR: '1'
       - run: npm run package
+      - run: npm run package:safari && npm run build:site && npm run package:materials && npm run check:artifacts
+      - run: npm run test:website
+        env:
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -40,7 +44,7 @@ jobs:
       - run: npx playwright install --with-deps webkit
       - run: npm run test:webkit
       - name: Verify published userscript matches its source
-        run: git diff --exit-code -- userscripts/SubtitleCurtain.user.js
+        run: git diff --exit-code -- userscripts/
       - uses: actions/upload-artifact@v4
         if: always()
         with:

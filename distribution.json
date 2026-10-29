@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/KIMMMMY112/SubtitleCurtain",
+  "website": "https://kimmmmy112.github.io/SubtitleCurtain/",
+  "stable": "0.2.1",
+  "safariPreview": "0.2.1",
+  "safariTag": "v0.2.1-safari-preview.1",
+  "stores": {"chrome": null, "edge": null, "greasyfork": null}
+}

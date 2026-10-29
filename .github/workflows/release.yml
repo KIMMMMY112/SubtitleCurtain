@@ -1,0 +1,32 @@
+name: Build release packages
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps webkit
+      - run: npm run check
+      - run: xvfb-run -a npm run test:browser
+        env:
+          SC_BROWSER_LABEL: Chrome for Testing (Release CI Linux)
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
+      - run: npm run test:webkit
+      - run: npm run package && npm run build:site && npm run package:materials && npm run check:artifacts
+      - run: npm run test:website
+        env:
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verified-release-packages
+          path: |
+            dist/
+            test-results/

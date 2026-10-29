@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "SubtitleCurtain — 字幕遮挡器",
   "short_name": "SubtitleCurtain",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "minimum_chrome_version": "120",
   "description": "Cover translated subtitles with a draggable, customizable curtain. Local only; no accounts or servers.",
   "permissions": [
@@ -37,5 +37,6 @@
       "match_about_blank": true,
       "match_origin_as_fallback": true
     }
-  ]
+  ],
+  "homepage_url": "https://github.com/KIMMMMY112/SubtitleCurtain"
 }
