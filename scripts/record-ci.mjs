@@ -3,7 +3,7 @@ const version=JSON.parse(await readFile('manifest.json','utf8')).version;
 for(const name of await readdir('test-results')){
  try {
   const path=`test-results/${name}/results.json`,data=JSON.parse(await readFile(path,'utf8'));
-  delete data.executablePath;delete data.extensionDirectory;
+  delete data.executablePath;delete data.extensionDirectory;delete data.extensionDir;
   await writeFile(`docs/test-results/ci-${name}-v${version}.json`,JSON.stringify(data,null,2)+'\n');
  }catch(error){if(error.code!=='ENOENT')throw error;}
 }

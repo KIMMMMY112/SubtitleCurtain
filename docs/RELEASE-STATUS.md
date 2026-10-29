@@ -27,3 +27,5 @@ No native signed Apple app, Firefox task, paid API or server has been added. Sto
 ## Current local verification
 
 22 unit tests, manifest/CSP/local-runtime checks, Chrome 28 browser cases, WebKit 30 viewport cases and website 7 interaction/layout cases passed. Package runtime parity, userscript channel identity, folder ZIP and checksums are checked separately. Website desktop/tablet/mobile layout is browser emulation, not physical-device evidence. Authentic media provenance is in [media/README.md](media/README.md).
+
+The built Store ZIP was also loaded as a separate real Chrome extension and passed all 28 checks on Chrome 156.0.8078.49. [Record](test-results/chrome-store-v0.2.1.json).
