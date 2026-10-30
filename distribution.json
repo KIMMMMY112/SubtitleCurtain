@@ -4,5 +4,9 @@
   "stable": "0.2.1",
   "safariPreview": "0.2.1",
   "safariTag": "v0.2.1-safari-preview.1",
-  "stores": {"chrome": null, "edge": null, "greasyfork": null}
+  "stores": {
+    "chrome": null,
+    "edge": null,
+    "greasyfork": "https://greasyfork.org/en/scripts/602877-subtitlecurtain"
+  }
 }

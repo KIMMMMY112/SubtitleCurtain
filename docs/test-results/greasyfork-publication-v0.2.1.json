@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "url": "https://greasyfork.org/en/scripts/602877-subtitlecurtain",
+  "updateURL": "https://update.greasyfork.org/scripts/602877/SubtitleCurtain.meta.js",
+  "downloadURL": "https://update.greasyfork.org/scripts/602877/SubtitleCurtain.user.js",
+  "runtimeMatchesTestedBuild": true,
+  "normalizedBodySHA256": "cc36be12680844dd1a2fc487130f9c5b1a80eca2248a68485f178d6dd559c503",
+  "physicalIOSAcceptance": false,
+  "automaticManagerUpgradeAcceptance": false
+}

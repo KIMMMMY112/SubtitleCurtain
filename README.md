@@ -14,7 +14,7 @@ A free, open-source subtitle hider: drag a customizable curtain over the subtitl
 | --- | --- | --- | --- | --- |
 | [Install from GitHub](docs/INSTALL.md#chrome-edge-brave-opera--free-github-zip) | [Install from GitHub](docs/INSTALL.md#chrome-edge-brave-opera--free-github-zip) | [Install from GitHub](docs/INSTALL.md#chrome-edge-brave-opera--free-github-zip) | [Install from GitHub](docs/INSTALL.md#chrome-edge-brave-opera--free-github-zip) | [Userscripts preview](docs/SAFARI.md) |
 
-Store listings and Greasy Fork are **not published yet**. These links lead to real GitHub installation instructions. GitHub downloads will remain free and available if listings are added. If this is useful, a **[GitHub star](https://github.com/KIMMMMY112/SubtitleCurtain)** helps other learners find the project. No incentives or star exchanges.
+Chrome and Edge store listings are **not published yet**. The [Safari userscript preview is published on Greasy Fork](https://greasyfork.org/en/scripts/602877-subtitlecurtain). The Chromium links lead to real GitHub installation instructions. GitHub downloads will remain free and available if listings are added. If this is useful, a **[GitHub star](https://github.com/KIMMMMY112/SubtitleCurtain)** helps other learners find the project. No incentives or star exchanges.
 
 ## Features
 
@@ -42,7 +42,7 @@ Store listings and Greasy Fork are **not published yet**. These links lead to re
 
 ### Safari on Mac, iPhone and iPad — preview
 
-Install the free [Userscripts host app](https://apps.apple.com/us/app/userscripts/id1463298887), enable it in Safari, then open the [GitHub script](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.user.js) **in Safari** and use Extensions → Userscripts to install it. Allow access to the install page and your video website.
+Install the free [Userscripts host app](https://apps.apple.com/us/app/userscripts/id1463298887), enable it in Safari, then open the [Greasy Fork script page](https://greasyfork.org/en/scripts/602877-subtitlecurtain) **in Safari**. Choose **Install this script**, then use Extensions → Userscripts to complete installation. Allow access to the installation page and your video website. The [GitHub `.user.js` download](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.user.js) remains a free backup.
 
 If no install prompt appears, use the **Userscripts directory ZIP** from the [Safari preview release](https://github.com/KIMMMMY112/SubtitleCurtain/releases): extract it in Files, then select the folder directly containing `SubtitleCurtain.user.js` in Userscripts → **Set Userscripts Directory**. Existing scripts can share the same selected folder.
 

@@ -24,7 +24,7 @@ The screenshot is Chrome; Edge, Brave and Opera have their own labels. Developer
 
 ## Safari — free Userscripts preview
 
-See [Safari installation](SAFARI.md). Install the free Userscripts host app, then install the `.user.js` script in Safari. If the install prompt is absent, use the directory ZIP fallback. The iPad installation issue is still recorded as unresolved until there is actual device evidence. Greasy Fork submission materials are prepared; a live listing will be linked only after publication.
+See [Safari installation](SAFARI.md). Install the free Userscripts host app, then install the `.user.js` script in Safari. If the install prompt is absent, use the directory ZIP fallback. The iPad installation issue is still recorded as unresolved until there is actual device evidence. The [Greasy Fork script page](https://greasyfork.org/en/scripts/602877-subtitlecurtain) is published; choose Install this script in Safari, then complete installation through Userscripts. GitHub script and directory downloads remain available.
 
 No authentic iPad installation screenshot is available yet; we do not substitute a desktop mockup. The Userscripts app chooses a folder; its Safari extension handles script lists and installation. Existing Mac installation does not automatically install the script on iPad/iPhone.
 

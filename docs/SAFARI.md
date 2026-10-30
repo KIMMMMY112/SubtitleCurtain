@@ -6,6 +6,8 @@ Safari 已纳入项目支持范围。当前提供免费 **Userscripts 用户脚�
 
 ## 安装
 
+推荐：在 Safari 打开 [Greasy Fork 安装页](https://greasyfork.org/en/scripts/602877-subtitlecurtain) → Install this script → Safari 扩展菜单 → Userscripts 完成安装。请为安装页和视频网站分别授予管理器访问权限。页面发布成功不等于 iPhone/iPad 已完成真机验收；GitHub 原始脚本和下方目录 ZIP 继续作为免费备用。
+
 ### iPad / iPhone 没有安装提示：直接选择脚本目录
 
 Userscripts App 用来选择脚本目录；脚本列表和安装提示在 Safari 的 Userscripts 扩展弹窗内。Mac 上安装过脚本，不等于 iPad 已经安装。
@@ -28,7 +30,7 @@ iOS/iPadOS 的 Safari 设置位置会随系统版本变化，可以从系统设�
 
 ## 保留设置与更新
 
-GitHub 版现已提供固定的 `.meta.js` 更新元数据和 `.user.js` 下载地址，二者版本一致。Greasy Fork 专用构建不写入 GitHub 更新地址，由 Greasy Fork 在发布时写入自己的地址；目前尚未获得正式脚本页面。
+GitHub 版现已提供固定的 `.meta.js` 更新元数据和 `.user.js` 下载地址，二者版本一致。Greasy Fork 专用构建不写入 GitHub 更新地址，由 Greasy Fork 在发布时写入自己的地址；现已发布 [Greasy Fork 脚本页面](https://greasyfork.org/en/scripts/602877-subtitlecurtain)。
 
 Userscripts 的更新行为依版本而异，部分版本停用了自动检查；不能承诺 iPhone/iPad 自动升级。管理器支持更新时使用其更新控制；否则替换同一 `SubtitleCurtain.user.js`，不要另装不同名称的副本。固定地址见 [元数据](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.meta.js) 与 [完整脚本](https://raw.githubusercontent.com/KIMMMMY112/SubtitleCurtain/main/userscripts/SubtitleCurtain.user.js)。本次验证覆盖元数据/构建一致性，不等于已完成真机管理器更新验收。
 

@@ -9,6 +9,7 @@ let html=await readFile('site/index.html','utf8');
 const stable=`${config.repository}/releases/download/v${config.stable}/SubtitleCurtain-Chromium-v${config.stable}.zip`;
 const fallback=`${config.repository}/releases/download/${config.safariTag}/SubtitleCurtain-Safari-Userscripts-v${config.safariPreview}.zip`;
 html=html.replace(/(id="chromium-download" href=")[^"]+/,`$1${stable}`).replace(/(id="safari-fallback" href=")[^"]+/,`$1${fallback}`);
+if(config.stores.greasyfork) html=html.replace(/(id="safari-script" href=")[^"]+/,`$1${config.stores.greasyfork}`);
 await writeFile('site/index.html',html);
 const policy=await readFile('PRIVACY.md','utf8');
 const escape=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');

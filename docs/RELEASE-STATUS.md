@@ -1,6 +1,6 @@
 # Platform and release status
 
-Audit date: 2026-10-29. This file distinguishes published evidence from prepared work. Check GitHub Releases/Actions for the final publication result; do not infer that a local build is already online.
+Updated: 2026-10-30. Published links below were verified after release. Physical-device acceptance and store review remain separate from build and publishing success.
 
 ## Existing releases
 
@@ -8,19 +8,19 @@ Audit date: 2026-10-29. This file distinguishes published evidence from prepared
 - **v0.2.0-safari-preview.1**: published userscript, directory fallback and uncompiled native-resource ZIP. Shared controls/GM storage, visual viewport and Safari fullscreen events. 20 unit checks, Chrome 28 regression, WebKit 30 across three viewport sizes; native Mac Safari observations are listed separately.
 - **iPad report**: Userscripts opens, but no install prompt or no SubtitleCurtain entry. Directory kit supplied; the remedy has not been verified on iPad. iPhone/iPad are not passed.
 
-## v0.2.1 work
+## v0.2.1 publication
 
-| Channel | Status before publication | Evidence / remaining gate |
+| Channel | Current status | Evidence / remaining gate |
 | --- | --- | --- |
-| Chromium GitHub | Build and regression candidate | Preserve v0.1.0; publish a new tag only after checks. |
+| Chromium GitHub | [v0.2.1 stable published](https://github.com/KIMMMMY112/SubtitleCurtain/releases/tag/v0.2.1) | Manual, Store and Publisher Materials ZIPs published; all downloaded SHA256 values verified; Store runtime matches tested source. v0.1.0 preserved. |
 | Chrome 156.0.8078.49 / macOS arm64 | 28/28 release-source regression passed | [Raw record](test-results/chrome-v0.2.1.json); no broader website claim. |
 | Edge / Brave / Opera current | Same core and package; separate retest needed | v0.1.0 evidence remains historical until a current browser run is recorded. |
-| Safari Userscripts | Preview; metadata and folder kit prepared | 30/30 WebKit viewport checks passed with GM test bridge; real manager upgrade and physical iOS remain pending. |
+| Safari Userscripts | [GitHub preview published](https://github.com/KIMMMMY112/SubtitleCurtain/releases/tag/v0.2.1-safari-preview.1) and [Greasy Fork published](https://greasyfork.org/en/scripts/602877-subtitlecurtain) | 30/30 WebKit viewport checks passed with GM test bridge. Hosted GF body matches tested source after metadata rewriting. Actual manager upgrade and physical iOS remain pending. |
 | iPhone / iPad Safari | Pending physical devices | Keep existing iPad installation report. |
 | Edge Add-ons | Submission materials prepared | Publisher account, agreements/identity verification, final submission and store review required. |
 | Chrome Web Store | Submission materials prepared | Publisher account/registration fee if not already enrolled, final submission and review required. No payment authorized. |
-| Greasy Fork | Self-contained build and listing text prepared | Account/login and publication required; no live listing URL yet. |
-| GitHub Pages | Static bilingual site and workflow prepared | Configure Pages source, deploy and verify public URL. |
+| Greasy Fork | [Public version 0.2.1](https://greasyfork.org/en/scripts/602877-subtitlecurtain) | Installation page and rewritten metadata/download URLs verified. iOS installation behavior is not marked passed. |
+| GitHub Pages | [Public site deployed](https://kimmmmy112.github.io/SubtitleCurtain/) | GitHub Actions deployment passed; homepage/privacy return HTTPS success. English/Chinese browser-specific installation, real media and FAQ are available. |
 
 No native signed Apple app, Firefox task, paid API or server has been added. Store and GitHub packages contain identical runtime files. Fullscreen modes and test-bridge/mobile-viewports remain explicitly distinguished.
 
@@ -33,3 +33,10 @@ The built Store ZIP was also loaded as a separate real Chrome extension and pass
 ## Publication pipeline verification
 
 [GitHub Actions run 40980754658](https://github.com/KIMMMMY112/SubtitleCurtain/actions/runs/40980754658) executes source checks, Chromium extension regression, WebKit viewport tests, website tests and archive/checksum parity before publication. Raw CI records are in docs/test-results/ci-*-v0.2.1.json. Actual store review, physical iOS and real manager-upgrade tests remain pending.
+
+## Verified public distribution
+
+- [Release pipeline](https://github.com/KIMMMMY112/SubtitleCurtain/actions/runs/40980754658): passed source/unit checks, real Chrome, installed Store ZIP, WebKit viewport, website and package checks before publishing.
+- [Merged main pull request](https://github.com/KIMMMMY112/SubtitleCurtain/pull/2). The previous Safari pull request is now merged as part of the same history.
+- [First Pages deployment](https://github.com/KIMMMMY112/SubtitleCurtain/actions/runs/40981243154): successful.
+- GitHub and Greasy Fork metadata retain name/namespace/version 0.2.1 and separate channel-owned update endpoints. This verifies distribution contracts, not unattended updates in every manager.

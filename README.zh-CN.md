@@ -21,9 +21,9 @@
 
 **Chrome / Edge / Brave / Opera：** 下载稳定版中的 **Chromium ZIP**，解压并保留文件夹。打开对应浏览器的扩展管理页，开启开发者模式 → 加载已解压的扩展程序 → 选择直接包含 `manifest.json` 的文件夹。刷新视频网页，从扩展菜单打开 SubtitleCurtain，开启显示并调整。详情及真实截图见 [安装说明](docs/INSTALL.md)。商店 ZIP 用于发布者提交，普通用户无需使用。
 
-**Safari：** 已实现免费的 Userscripts 用户脚本预览版，复用同一核心。先安装并启用 Userscripts，再在 Safari 安装脚本；没有提示时使用 Userscripts 目录 ZIP。详情见 [Safari 说明](docs/SAFARI.md)。iPhone/iPad 尚待真机验收，已有 iPad 无安装提示或找不到脚本的反馈；不能写成已通过。无需 Xcode、Node.js、Apple 付费开发者账户。
+**Safari：** 已实现免费的 Userscripts 用户脚本预览版，复用同一核心。先安装并启用 Userscripts，再用 Safari 打开 [Greasy Fork 安装页](https://greasyfork.org/en/scripts/602877-subtitlecurtain)，点 Install this script，并在扩展菜单中完成安装；没有提示时使用 Userscripts 目录 ZIP。详情见 [Safari 说明](docs/SAFARI.md)。iPhone/iPad 尚待真机验收，已有 iPad 无安装提示或找不到脚本的反馈；不能写成已通过。无需 Xcode、Node.js、Apple 付费开发者账户。
 
-当前没有商店和 Greasy Fork 正式条目，不展示虚假链接。未来即使上架，也会继续保留 GitHub 免费下载安装。
+Greasy Fork 脚本页面已经发布；Chrome/Edge 商店尚未上架，不展示虚假商店链接。GitHub 免费下载安装方式继续保留。
 
 ## 兼容范围与限制
 

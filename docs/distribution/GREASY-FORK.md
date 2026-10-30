@@ -1,6 +1,6 @@
 # Greasy Fork publication pack
 
-Prepared from official documentation on **2026-10-29**. No Greasy Fork listing has been verified for SubtitleCurtain at preparation time; do not invent a listing ID or install button.
+Prepared from official documentation on **2026-10-29**. Published script page: [https://greasyfork.org/en/scripts/602877-subtitlecurtain](https://greasyfork.org/en/scripts/602877-subtitlecurtain). Version 0.2.1; public hosted runtime was downloaded and matched the tested GF-channel body after metadata rewriting. The live page supplies an Install this script button. Physical iPhone/iPad and real manager-upgrade acceptance are still pending.
 
 ## Upload and code review
 
