@@ -60,6 +60,29 @@
       seen.add(p.id); return true;
     }).map(p => ({id:p.id, name:p.name.trim().slice(0,60), style:styleOnly(p.style)}));
   }
+  function editLibrary(current, action, extra = {}, makeId) {
+    let library = normalizeLibrary(current);
+    if (action === 'get') return library;
+    if (action === 'save') {
+      const item = extra.item;
+      if (!item || typeof item.name !== 'string' || !item.name.trim()) throw new Error('请输入花色名称');
+      const index = library.findIndex(p => p.id === item.id);
+      if (index < 0 && library.length >= 50) throw new Error('最多保存 50 个花色，请先删除一些');
+      const preset = {id:index < 0 ? makeId() : library[index].id,name:item.name,style:item.style};
+      if (index < 0) library.push(preset); else library[index] = preset;
+    } else if (action === 'delete') library = library.filter(p => p.id !== extra.id);
+    else if (action === 'import') {
+      if (!Array.isArray(extra.items) || extra.items.length > 50) throw new Error('导入文件必须包含至多 50 个花色');
+      const imported = normalizeLibrary(extra.items);
+      if (imported.length !== extra.items.length) throw new Error('花色文件格式无效');
+      for (const item of imported) {
+        const index = library.findIndex(p => p.id === item.id);
+        if (index < 0) library.push(item); else library[index] = item;
+      }
+      if (library.length > 50) throw new Error('导入后将超过 50 个花色');
+    } else throw new Error('未知花色操作');
+    return normalizeLibrary(library);
+  }
   function storageKey(hostname) {
     const host = (typeof hostname === 'string' ? hostname : '').toLowerCase();
     return STORAGE_PREFIX + (host || 'local');
@@ -97,5 +120,5 @@
       : s.shape === 'custom' ? `polygon(${polygonPoints(s.polygon).map(p => `${p[0]}% ${p[1]}%`).join(', ')})` : 'none';
     return { background: background(s), borderRadius: radius, clipPath, opacity: String(s.opacity) };
   }
-  global.SubtitleCurtainCore = Object.freeze({ DEFAULTS, CHOICES, STYLE_KEYS, normalize, merge, storageKey, geometry, background, appearance, clamp, polygonPoints, styleOnly, normalizeLibrary });
+  global.SubtitleCurtainCore = Object.freeze({ DEFAULTS, CHOICES, STYLE_KEYS, normalize, merge, storageKey, geometry, background, appearance, clamp, polygonPoints, styleOnly, normalizeLibrary, editLibrary });
 })(globalThis);

@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.1
+
+- Unify shared Chromium/Safari sources while keeping Safari physical-device acceptance pending.
+- Add English-first and Chinese READMEs, authentic extension demo captures, installation guide, contribution guide and issue templates.
+- Add a bilingual static GitHub Pages site with browser-specific instructions and honest publication/compatibility status.
+- Separate store-upload ZIP from the documented GitHub manual-install ZIP; verify exact runtime parity and checksums.
+- Add stable userscript metadata/download endpoints and a Greasy Fork-specific self-contained build with platform-managed update URLs. Automatic manager updates remain version-dependent and unverified on iOS.
+- Prepare bilingual store/Greasy Fork/community materials; adjust store icon padding. No paid account or service enrolled.
+
+
+## 0.2.0 Safari preview (not a stable Safari App Store release)
+
+- Share settings controls and validated style-library editing across the extension and Safari Userscripts adapter.
+- Add a self-contained Userscripts build for Mac, iPhone and iPad, with a page toolbar, no remote runtime code, and GM-backed local settings.
+- Add visual-viewport sizing, primary-pointer protection and prefixed Safari fullscreen events.
+- Accept Safari extension URLs and the browser API namespace; provide native Safari Web Extension resources for future Apple packaging.
+- Add GM storage regression tests, WebKit desktop/phone/tablet viewport checks, and a separate native/device verification record.
+- Real iPhone/iPad acceptance remains pending; native iOS video fullscreen and picture-in-picture cannot display this webpage overlay.
+
 ## 0.1.0 — 2026-10-27
 
 - Continue the supplied six-file MV3 project; preserve its dependency-free core and initial implementation in Git history.

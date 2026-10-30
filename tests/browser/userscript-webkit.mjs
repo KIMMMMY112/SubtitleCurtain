@@ -1,0 +1,41 @@
+import {webkit} from 'playwright';import assert from 'node:assert/strict';import {readFile,writeFile,mkdir} from 'node:fs/promises';import {createServer} from 'node:http';import {resolve} from 'node:path';
+const version=JSON.parse(await readFile('manifest.json')).version,script=await readFile(`dist/safari/SubtitleCurtain-Safari-v${version}.user.js`,'utf8'),html=await readFile('tests/browser/safari-fixture.html');
+const server=createServer((req,res)=>{if(req.url==='/favicon.ico'){res.writeHead(204);res.end();return;}res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);});await new Promise(r=>server.listen(0,'0.0.0.0',r));const port=server.address().port;
+const browser=await webkit.launch({headless:true});const profiles=[{name:'desktop',viewport:{width:1200,height:800}},{name:'phone-viewport',viewport:{width:390,height:844},isMobile:true,hasTouch:true},{name:'tablet-viewport',viewport:{width:1024,height:1366},isMobile:true,hasTouch:true}];
+const out=resolve('test-results/safari-webkit');await mkdir(out,{recursive:true});const all=[];
+try {for(const profile of profiles){
+ const values=new Map(),results=[],errors=[];const context=await browser.newContext({...profile,acceptDownloads:true});
+ await context.exposeBinding('__scGet',(_,key)=>values.get(key));await context.exposeBinding('__scSet',(_,key,value)=>{values.set(key,value);});
+ await context.addInitScript({content:`if(location.protocol==='http:'||location.protocol==='https:'){const GM={getValue:key=>window.__scGet(key),setValue:(key,value)=>window.__scSet(key,value)};const start=()=>{${script}\n};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();}`});
+ const page=await context.newPage();page.on('pageerror',error=>errors.push(error.message));await page.goto(`http://127.0.0.1:${port}/`);
+ const ui=page.locator('#subtitle-curtain-userscript-controls'),mask=page.locator('#subtitle-curtain-root').locator('#mask');
+ const wait=(fn,arg)=>page.waitForFunction(fn,arg,{polling:50,timeout:10000});
+ const state=()=>values.get('subtitleCurtain:v1:site:127.0.0.1');
+ const info=()=>mask.evaluate(m=>{const r=m.getBoundingClientRect(),v=m.querySelector('#visual');return {hidden:m.hidden,locked:m.classList.contains('locked'),x:r.x,y:r.y,width:r.width,height:r.height,opacity:v.style.opacity,clip:v.style.clipPath,bg:v.style.background};});
+ async function run(name,job){try{await job();results.push({name,status:'PASS'});console.log(profile.name,'PASS',name);}catch(e){results.push({name,status:'FAIL',error:e.message});throw e;}}
+ async function action(id){const l=ui.locator('#'+id);if(profile.hasTouch)await l.tap();else await l.click();}
+ async function input(id,value){await ui.locator('#'+id).evaluate((el,v)=>{if(el.type==='checkbox')el.checked=v;else el.value=v;el.dispatchEvent(new Event(el.type==='range'?'input':'change',{bubbles:true}));},value);await page.waitForTimeout(30);}
+ try {
+ await wait(()=>!!document.getElementById('subtitle-curtain-userscript-controls')?.shadowRoot?.getElementById('controls')&&!document.getElementById('subtitle-curtain-userscript-controls').shadowRoot.getElementById('controls').disabled);
+ await run('Starts hidden with functional toolbar and settings',async()=>{assert.equal((await info()).hidden,true);await action('sc-toggle');await wait(()=>!document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden);await action('sc-settings');assert.equal(await ui.locator('#sc-panel').isVisible(),true);});
+ await run('Touch-sized controls and viewport-constrained panel',async()=>{const b=await ui.locator('#sc-settings').boundingBox();assert.ok(b.width>=44&&b.height>=44);const panel=await ui.locator('#sc-panel').boundingBox();assert.ok(panel.width<=profile.viewport.width&&panel.x>=0);assert.equal(await ui.locator('#presetName').evaluate(e=>getComputedStyle(e).fontSize),'16px');});
+ await run('Width, height, opacity, fills and custom shape edit the curtain',async()=>{
+  await input('width',55);await input('height',72);await input('fillType','gradient');await input('color1','#123456');await input('color2','#abcdef');await input('opacity',75);await input('shape','custom');await input('polygon','0,50 10,0 90,0 100,50 90,100 10,100');
+  await page.waitForFunction(()=>document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('visual').style.opacity==='0.75');const a=await info();assert.equal(a.height,72);assert.match(a.bg,/linear-gradient/);assert.match(a.clip,/polygon/);assert.equal(state().width,.55);
+ });
+ await run('Saved library create, rename, apply and delete',async()=>{
+  await ui.locator('#presetName').fill('WebKit test');await action('savePreset');await ui.locator('#preset option').nth(1).waitFor({state:'attached'});const id=await ui.locator('#preset').inputValue();assert.ok(id);
+  await ui.locator('#presetName').fill('Renamed');await action('renamePreset');await page.waitForFunction(()=>document.getElementById('subtitle-curtain-userscript-controls').shadowRoot.getElementById('preset').selectedOptions[0].textContent==='Renamed');
+  await input('shape','rectangle');await action('applyPreset');await page.waitForFunction(()=>document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('visual').style.clipPath.startsWith('polygon'));
+  await action('deletePreset');await page.waitForFunction(()=>document.getElementById('subtitle-curtain-userscript-controls').shadowRoot.getElementById('preset').options.length===1);
+ });
+ await run('Hiding and reopening retains size and style',async()=>{await action('sc-settings');await action('sc-toggle');await wait(()=>document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden);await action('sc-toggle');await wait(()=>!document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').hidden);assert.equal((await info()).height,72);});
+ await run('Mouse-pointer dragging in this viewport; physical touch drag remains unverified',async()=>{const a=await info();await page.mouse.move(a.x+a.width/2,a.y+30);await page.mouse.down();await page.mouse.move(a.x+a.width/2-20,a.y-10,{steps:8});await page.mouse.up();assert.ok((await info()).y<a.y-20);});
+ await run('Lock passes pointer input to the underlying video',async()=>{await action('sc-settings');await input('locked',true);await action('sc-settings');const a=await info();assert.equal(await page.evaluate(([x,y])=>document.elementFromPoint(x,y).tagName,[a.x+a.width/2,a.y+a.height/2]),'VIDEO');});
+ await run('Reload restores enabled state, lock, geometry and appearance',async()=>{const saved=structuredClone(state());await page.reload();await wait(()=>!!document.getElementById('subtitle-curtain-root')?.shadowRoot?.getElementById('mask'));await wait(()=>document.getElementById('subtitle-curtain-root').shadowRoot.getElementById('mask').classList.contains('locked'));assert.deepEqual(state(),saved);assert.equal((await info()).height,72);});
+ await run('Actual video frames play',async()=>{await page.locator('#play').click();await page.waitForFunction(()=>{const v=document.getElementById('video');return !v.paused&&v.videoWidth>0;});});
+ await run('Settings can reopen after reload and a narrow/landscape viewport',async()=>{await action('sc-settings');await page.setViewportSize({width:profile.viewport.height,height:profile.viewport.width});await page.waitForTimeout(50);const a=await ui.locator('#sc-panel').boundingBox();assert.ok(a.x>=0&&a.width<=profile.viewport.height);assert.equal(await ui.locator('#controls').isEnabled(),true);});
+ await page.screenshot({path:resolve(out,profile.name+'.png'),fullPage:false});assert.deepEqual(errors,[]);
+ }catch(e){process.exitCode=1;console.error(profile.name,e.message);await page.screenshot({path:resolve(out,profile.name+'-failure.png')}).catch(()=>{});}
+ all.push({profile:profile.name,viewport:profile.viewport,results,errors});await context.close();
+}}finally{await writeFile(resolve(out,'results.json'),JSON.stringify({engine:'Playwright WebKit '+browser.version(),platform:process.platform,version,gmStorage:'In-memory test bridge, not the real Userscripts extension',physicalSafariOrIOS:false,date:new Date().toISOString(),profiles:all},null,2));await browser.close();server.close();}

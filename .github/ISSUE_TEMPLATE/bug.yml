@@ -1,0 +1,38 @@
+name: Bug report / 使用问题
+description: Report installation, curtain or playback problems.
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, OS and version / 浏览器、系统和版本
+      placeholder: Chrome 156 on macOS 15; SubtitleCurtain 0.2.1
+    validations:
+      required: true
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation method / 安装方式
+      options:
+        - GitHub Chromium ZIP
+        - Safari Userscripts link
+        - Safari Userscripts directory ZIP
+        - Store (include listing URL below)
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Playback mode / 播放模式
+      options:
+        - Inline webpage
+        - Website/CSS fullscreen
+        - Player container Fullscreen API
+        - Native system video fullscreen or picture-in-picture
+        - Installation failed before playback
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected result and actual result / 操作与现象
+      description: Public site links only. Redact private URLs, accounts and tabs from screenshots.
+    validations:
+      required: true

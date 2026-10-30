@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kimmmmy112.github.io/SubtitleCurtain/sitemap.xml

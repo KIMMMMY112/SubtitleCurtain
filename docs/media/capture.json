@@ -1,0 +1,572 @@
+{
+  "version": "0.2.1",
+  "browser": "Chrome/156.0.8078.49",
+  "date": "2026-10-29T09:56:19.620Z",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "gif": {
+    "width": 960,
+    "height": 600,
+    "frames": 46,
+    "durationMs": 8329
+  },
+  "source": "Actual installed MV3 extension on a self-authored synthetic canvas-captureStream video. No third-party footage. Not a Bilibili/YouTube/Safari/iOS test.",
+  "interactions": "Real extension manager events and mouse-pointer drag/resize. No painted-in curtain, composited settings panel, or AI-generated product interface.",
+  "errors": [],
+  "timeline": [
+    {
+      "frame": 0,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 1,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 2,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 3,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 4,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 5,
+      "action": "Before: the self-authored English and Chinese captions are both visible",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": false
+      }
+    },
+    {
+      "frame": 6,
+      "action": "Show the real installed extension",
+      "curtain": {
+        "x": 192,
+        "y": 616,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 7,
+      "action": "Show the real installed extension",
+      "curtain": {
+        "x": 192,
+        "y": 616,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 8,
+      "action": "Show the real installed extension",
+      "curtain": {
+        "x": 192,
+        "y": 616,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 9,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 200,
+        "y": 615,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 10,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 208,
+        "y": 614,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 11,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 216,
+        "y": 613,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 12,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 224,
+        "y": 612,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 13,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 232,
+        "y": 611,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 14,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 240,
+        "y": 610,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 15,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 248,
+        "y": 609,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 16,
+      "action": "Actual pointer drag covers the Chinese line",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 17,
+      "action": "English line stays visible",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 18,
+      "action": "English line stays visible",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 19,
+      "action": "English line stays visible",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 20,
+      "action": "English line stays visible",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 21,
+      "action": "English line stays visible",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 768,
+        "height": 56,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 22,
+      "action": "Actual pointer resize",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 774,
+        "height": 57.59375,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 23,
+      "action": "Actual pointer resize",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 781,
+        "height": 59.1875,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 24,
+      "action": "Actual pointer resize",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 787,
+        "height": 60.796875,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 25,
+      "action": "Actual pointer resize",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 794,
+        "height": 62.390625,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 26,
+      "action": "Actual pointer resize",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 27,
+      "action": "Change style using the real extension controls",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 28,
+      "action": "Change style using the real extension controls",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 29,
+      "action": "Change style using the real extension controls",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 30,
+      "action": "Change style using the real extension controls",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 31,
+      "action": "Change style using the real extension controls",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": false
+      }
+    },
+    {
+      "frame": 32,
+      "action": "Lock position: drag handle disappears and video clicks pass through",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 33,
+      "action": "Lock position: drag handle disappears and video clicks pass through",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 34,
+      "action": "Lock position: drag handle disappears and video clicks pass through",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 35,
+      "action": "Lock position: drag handle disappears and video clicks pass through",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 36,
+      "action": "Lock position: drag handle disappears and video clicks pass through",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 37,
+      "action": "Hide without losing saved appearance",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": true
+      }
+    },
+    {
+      "frame": 38,
+      "action": "Hide without losing saved appearance",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": true
+      }
+    },
+    {
+      "frame": 39,
+      "action": "Hide without losing saved appearance",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": true
+      }
+    },
+    {
+      "frame": 40,
+      "action": "Hide without losing saved appearance",
+      "curtain": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "hidden": true,
+        "locked": true
+      }
+    },
+    {
+      "frame": 41,
+      "action": "Restore the saved curtain",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 42,
+      "action": "Restore the saved curtain",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 43,
+      "action": "Restore the saved curtain",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 44,
+      "action": "Restore the saved curtain",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    },
+    {
+      "frame": 45,
+      "action": "Restore the saved curtain",
+      "curtain": {
+        "x": 256,
+        "y": 608,
+        "width": 800,
+        "height": 64,
+        "hidden": false,
+        "locked": true
+      }
+    }
+  ]
+}

@@ -11,7 +11,8 @@
     const style = document.createElement('style');
     style.textContent = `
       :host {all:initial!important;position:fixed!important;inset:0!important;
-        width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;
+        left:var(--sc-offset-x,0px)!important;top:var(--sc-offset-y,0px)!important;right:auto!important;bottom:auto!important;
+        width:var(--sc-vw,100vw)!important;height:var(--sc-vh,100vh)!important;max-width:none!important;max-height:none!important;
         margin:0!important;padding:0!important;border:0!important;transform:none!important;
         z-index:2147483647!important;overflow:visible!important;pointer-events:none!important;
         background:transparent!important;color-scheme:light!important;}
@@ -36,8 +37,8 @@
     const grip = document.createElement('span'); grip.id = 'grip'; grip.textContent = '⠿';
     const handle = document.createElement('div'); handle.id = 'resize'; handle.setAttribute('aria-hidden','true');
     mask.append(visual, grip, handle); shadow.append(style, mask);
-    const viewport = () => ({width:window.innerWidth,height:window.innerHeight});
-    const fullscreen = () => document.fullscreenElement;
+    const viewport = () => ({width:window.visualViewport?.width || window.innerWidth,height:window.visualViewport?.height || window.innerHeight});
+    const fullscreen = () => document.fullscreenElement || document.webkitFullscreenElement;
     function active() {
       const fs = fullscreen();
       return settings.enabled && (isTop || !!fs) && fs?.tagName !== 'IFRAME';
@@ -56,7 +57,10 @@
     }
     function render() {
       mount();
-      const g = Core.geometry(settings, viewport());
+      const vp = viewport(), vv = window.visualViewport;
+      host.style.setProperty('--sc-vw',`${vp.width}px`);host.style.setProperty('--sc-vh',`${vp.height}px`);
+      host.style.setProperty('--sc-offset-x',`${vv?.offsetLeft || 0}px`);host.style.setProperty('--sc-offset-y',`${vv?.offsetTop || 0}px`);
+      const g = Core.geometry(settings, vp);
       Object.assign(mask.style,{left:`${g.left}px`,top:`${g.top}px`,width:`${g.width}px`,height:`${g.height}px`});
       Object.assign(visual.style,Core.appearance(settings));
       mask.hidden = !active();
@@ -74,7 +78,7 @@
       if (commit) onCommit(patch);
     }
     function down(e) {
-      if (settings.locked || !active() || e.button !== 0) return;
+      if (drag || e.isPrimary === false || settings.locked || !active() || e.button !== 0) return;
       e.preventDefault(); e.stopPropagation();
       drag = {id:e.pointerId,resize:e.target === handle,x:e.clientX,y:e.clientY,g:Core.geometry(settings,viewport())};
       mask.focus({preventScroll:true}); mask.setPointerCapture(e.pointerId);
@@ -115,7 +119,10 @@
     mask.addEventListener('lostpointercapture',finish);
     document.addEventListener('keydown',key,true);
     document.addEventListener('fullscreenchange',fullscreenChanged);
+    document.addEventListener('webkitfullscreenchange',fullscreenChanged);
     window.addEventListener('resize',render);
+    window.visualViewport?.addEventListener('resize',render);
+    window.visualViewport?.addEventListener('scroll',render);
     render();
     return Object.freeze({
       setSettings(s) {
@@ -128,7 +135,8 @@
       },
       getSettings() {return {...settings};},
       destroy() {disposed = true; observer.disconnect(); document.removeEventListener('keydown',key,true);
-        document.removeEventListener('fullscreenchange',fullscreenChanged); window.removeEventListener('resize',render); host.remove();}
+        document.removeEventListener('fullscreenchange',fullscreenChanged);document.removeEventListener('webkitfullscreenchange',fullscreenChanged);
+        window.removeEventListener('resize',render);window.visualViewport?.removeEventListener('resize',render);window.visualViewport?.removeEventListener('scroll',render);host.remove();}
     });
   }
   globalThis.SubtitleCurtainOverlay = Object.freeze({create});

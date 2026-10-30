@@ -1,0 +1,10 @@
+name: Privacy question / 隐私问题
+description: Ask about local data or permissions. Never include secrets.
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question / 问题
+      description: Do not include credentials, private browsing URLs or personal records.
+    validations:
+      required: true

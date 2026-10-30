@@ -3,10 +3,11 @@
   'use strict';
   if (globalThis.__subtitleCurtainInjected) return;
   globalThis.__subtitleCurtainInjected = true;
+  const api = globalThis.browser || globalThis.chrome;
   let overlay, context, saveError = '';
   let saveSequence = 0, pendingPatch = {};
   async function request(message) {
-    const response = await chrome.runtime.sendMessage(message);
+    const response = await api.runtime.sendMessage(message);
     if (!response?.ok) throw new Error(response?.error || '扩展未响应，请刷新网页');
     return response;
   }
@@ -29,7 +30,7 @@
     overlay.setSettings(result.settings);
   });
   // The popup always targets frame 0; nested players receive changes through storage.
-  chrome.runtime.onMessage.addListener((message, _sender, reply) => {
+  api.runtime.onMessage.addListener((message, _sender, reply) => {
     if (!message || !['SC_GET_STATE','SC_PATCH','SC_RESET'].includes(message.type)) return false;
     ready.then(async () => {
       if (message.type === 'SC_GET_STATE') return {ok:true,settings:overlay.getSettings(),site:context.site,saveError};
@@ -37,7 +38,7 @@
     }).then(reply,error => reply({ok:false,error:error.message}));
     return true;
   });
-  chrome.storage.onChanged.addListener((changes, area) => {
+  api.storage.onChanged.addListener((changes, area) => {
     if (area === 'local' && context && Object.hasOwn(changes,context.key)) overlay.setSettings({...changes[context.key].newValue,...pendingPatch});
   });
   ready.catch(error => console.warn('[SubtitleCurtain] Initialization failed',error));

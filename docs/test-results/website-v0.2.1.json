@@ -1,0 +1,35 @@
+{
+  "browser": "Chrome/156.0.8078.49",
+  "physicalMobileDevice": false,
+  "results": [
+    {
+      "name": "English homepage and all local product images load",
+      "status": "PASS"
+    },
+    {
+      "name": "All five browser tabs select correct guidance; no false store links",
+      "status": "PASS"
+    },
+    {
+      "name": "Chinese language selection persists across refresh",
+      "status": "PASS"
+    },
+    {
+      "name": "Demo is user-controlled and returns to static poster",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser selection works with arrow keys",
+      "status": "PASS"
+    },
+    {
+      "name": "Desktop, tablet and mobile layouts have no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "Privacy page and its source link are reachable locally",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

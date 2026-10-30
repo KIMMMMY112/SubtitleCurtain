@@ -21,6 +21,10 @@ jobs:
           PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
           SC_BROWSER_STDERR: '1'
       - run: npm run package
+      - run: npm run package:safari && npm run build:site && npm run package:materials && npm run check:artifacts
+      - run: npm run test:website
+        env:
+          PUPPETEER_DANGEROUS_NO_SANDBOX: 'true'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -28,3 +32,23 @@ jobs:
           path: |
             dist/
             test-results/
+  safari-webkit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps webkit
+      - run: npm run test:webkit
+      - name: Verify published userscript matches its source
+        run: git diff --exit-code -- userscripts/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: subtitle-curtain-safari-preview-and-webkit-results
+          path: |
+            dist/safari/
+            test-results/safari-webkit/

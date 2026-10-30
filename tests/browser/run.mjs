@@ -31,6 +31,7 @@ const maskInfo = async (frame=page.mainFrame()) => frame.evaluate(() => {
  return {hidden:m.hidden,locked:m.classList.contains('locked'),x:g.x,y:g.y,width:g.width,height:g.height,handle:{x:r.x+r.width/2,y:r.y+r.height/2},background:a.backgroundImage,color:a.backgroundColor,opacity:a.opacity,radius:a.borderRadius,clip:a.clipPath,popover:root.matches(':popover-open'),parent:root.parentElement.id};
 });
 async function ready(frame=page.mainFrame()) {await frame.waitForFunction(()=>!!document.getElementById('subtitle-curtain-root')?.shadowRoot);}
+async function visibleViewport() {return page.evaluate(()=>({width:window.visualViewport?.width || window.innerWidth,height:window.visualViewport?.height || window.innerHeight}));}
 async function state() {return ui.evaluate(async id=>(await chrome.tabs.sendMessage(id,{type:'SC_GET_STATE'},{frameId:0})).settings,tabId);}
 async function waitState(patch) {await ui.waitForFunction(async (id,p)=>{const s=(await chrome.tabs.sendMessage(id,{type:'SC_GET_STATE'},{frameId:0})).settings;return Object.entries(p).every(([k,v])=>s[k]===v);},{},tabId,patch);}
 async function input(id,value) {
@@ -68,7 +69,7 @@ try {
  await step('Resize handle changes width and height',async()=>{
    const b=await maskInfo();await drag(b.handle,{x:b.handle.x-120,y:b.handle.y+25});const a=await maskInfo();assert.ok(Math.abs(a.width-(b.width-120))<=2);assert.ok(Math.abs(a.height-(b.height+25))<=1);
  });
- await step('Width and height controls reach documented limits',async()=>{await input('width',42);await input('height',200);assert.equal((await maskInfo()).width,504);assert.equal((await maskInfo()).height,200);await input('height',56);});
+ await step('Width and height controls reach documented limits',async()=>{await input('width',42);await input('height',200);assert.equal((await maskInfo()).width,Math.round((await visibleViewport()).width*.42));assert.equal((await maskInfo()).height,200);await input('height',56);});
  await step('Solid colors, gradient colors, angle and opacity render',async()=>{
    await input('color1','#123456');assert.equal((await maskInfo()).color,'rgb(18, 52, 86)');await input('fillType','gradient');await input('color2','#ef5678');await input('angle',220);await input('opacity',65);
    const m=await maskInfo();assert.match(m.background,/220deg/);assert.match(m.background,/239, 86, 120/);assert.equal(m.opacity,'0.65');

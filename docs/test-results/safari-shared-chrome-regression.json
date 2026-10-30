@@ -1,0 +1,132 @@
+{
+  "label": "Chrome Safari shared-core regression",
+  "version": "Chrome/156.0.8078.48",
+  "executablePath": "Google Chrome",
+  "extensionDir": "safari-support source tree",
+  "headless": true,
+  "date": "2026-10-27T13:01:34.139Z",
+  "platform": "darwin",
+  "arch": "arm64",
+  "results": [
+    {
+      "name": "MV3 extension installed; default hidden; real video playback",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual action popup opens and its switch shows the curtain",
+      "status": "PASS"
+    },
+    {
+      "name": "Standalone shape and pattern manager opens from popup",
+      "status": "PASS"
+    },
+    {
+      "name": "Free mouse dragging preserves exact position",
+      "status": "PASS"
+    },
+    {
+      "name": "Resize handle changes width and height",
+      "status": "PASS"
+    },
+    {
+      "name": "Width and height controls reach documented limits",
+      "status": "PASS"
+    },
+    {
+      "name": "Solid colors, gradient colors, angle and opacity render",
+      "status": "PASS"
+    },
+    {
+      "name": "All four patterns render with adjustable spacing",
+      "status": "PASS"
+    },
+    {
+      "name": "All five built-in shapes and custom rounded corners render",
+      "status": "PASS"
+    },
+    {
+      "name": "Custom polygon renders; invalid coordinates are rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Ellipse/custom clipping does not clip the resize handle",
+      "status": "PASS"
+    },
+    {
+      "name": "Lock makes curtain and handles pass mouse clicks through to player",
+      "status": "PASS"
+    },
+    {
+      "name": "Keyboard movement, resizing, toggling and locking; inputs are left alone",
+      "status": "PASS"
+    },
+    {
+      "name": "Style library create, rename and update persist",
+      "status": "PASS"
+    },
+    {
+      "name": "Applying saved style preserves geometry, lock and enabled state",
+      "status": "PASS"
+    },
+    {
+      "name": "Style JSON export, delete and import round trip",
+      "status": "PASS"
+    },
+    {
+      "name": "Refresh restores position, size, fill, opacity, shape, enabled and lock",
+      "status": "PASS"
+    },
+    {
+      "name": "Website settings are isolated; style library is global",
+      "status": "PASS"
+    },
+    {
+      "name": "Container Fullscreen API playback keeps mask visible, draggable and persistent",
+      "status": "PASS"
+    },
+    {
+      "name": "Video element Fullscreen API playback shows top-layer curtain and permits lock",
+      "status": "PASS"
+    },
+    {
+      "name": "Cross-origin iframe fullscreen uses one curtain with top-site settings",
+      "status": "PASS"
+    },
+    {
+      "name": "Scroll and window resizing keep the curtain inside the viewport",
+      "status": "PASS"
+    },
+    {
+      "name": "Removing the host is repaired without duplicate masks",
+      "status": "PASS"
+    },
+    {
+      "name": "Opaque curtain can cover Chinese while leaving the English line visible",
+      "status": "PASS"
+    },
+    {
+      "name": "Opening popup.html directly explains installation instead of hanging",
+      "status": "PASS"
+    },
+    {
+      "name": "Browser internal pages show an actionable unsupported-page error",
+      "status": "PASS"
+    },
+    {
+      "name": "Manager layout has no horizontal overflow and no runtime errors",
+      "status": "PASS"
+    },
+    {
+      "name": "Closing and reopening the browser restores settings and saved styles",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "observations": [
+    {
+      "mode": "native-video-fullscreen",
+      "mouseDragMoved": false,
+      "note": "Native video fullscreen is only claimed for visible curtain and keyboard toggle/lock; use a player-container fullscreen for mouse editing."
+    }
+  ]
+}
