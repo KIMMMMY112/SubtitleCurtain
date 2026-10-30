@@ -29,3 +29,7 @@ No native signed Apple app, Firefox task, paid API or server has been added. Sto
 22 unit tests, manifest/CSP/local-runtime checks, Chrome 28 browser cases, WebKit 30 viewport cases and website 7 interaction/layout cases passed. Package runtime parity, userscript channel identity, folder ZIP and checksums are checked separately. Website desktop/tablet/mobile layout is browser emulation, not physical-device evidence. Authentic media provenance is in [media/README.md](media/README.md).
 
 The built Store ZIP was also loaded as a separate real Chrome extension and passed all 28 checks on Chrome 156.0.8078.49. [Record](test-results/chrome-store-v0.2.1.json).
+
+## Publication pipeline verification
+
+[GitHub Actions run 40980754658](https://github.com/KIMMMMY112/SubtitleCurtain/actions/runs/40980754658) executes source checks, Chromium extension regression, WebKit viewport tests, website tests and archive/checksum parity before publication. Raw CI records are in docs/test-results/ci-*-v0.2.1.json. Actual store review, physical iOS and real manager-upgrade tests remain pending.
